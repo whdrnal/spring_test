@@ -17,23 +17,37 @@ public class UsrArticleController {
 	// 인스턴스 변수 시작
 	@Autowired
 	private ArticleService articleService;
+	
 
 	// 액션 메서드 시작
 	@RequestMapping("/usr/article/doAdd")
 	@ResponseBody
-	public Article doAdd(String title, String body) {
-		int id = articleService.writeArticle(title, body);
+	public ResultData doAdd(String title, String body) {
+		if (Ut.empty(title)) {
+			return ResultData.from("F-1", "title(을)를 입력해주세요.");
+		}
+
+		if (Ut.empty(body)) {
+			return ResultData.from("F-2", "body(을)를 입력해주세요.");
+		}
+
+		ResultData writeArticleRd = articleService.writeArticle(title, body);
+		int id = (int) writeArticleRd.getData1();
 
 		Article article = articleService.getArticle(id);
 
-		return article;
+		return ResultData.newData(writeArticleRd, article);
 	}
+	
 
 	@RequestMapping("/usr/article/getArticles")
 	@ResponseBody
-	public List<Article> getArticles() {
-		return articleService.getArticles();
+	public ResultData getArticles() {
+		List<Article> articles = articleService.getArticles();
+
+		return ResultData.from("S-1", "게시물 리스트 입니다.", articles);
 	}
+	
 
 	@RequestMapping("/usr/article/getArticle")
 	@ResponseBody
@@ -45,6 +59,7 @@ public class UsrArticleController {
 
 		return ResultData.from("S-1", Ut.f("%d번 게시물입니다.", id), article);
 	}
+	
 
 	@RequestMapping("/usr/article/doDelete")
 	@ResponseBody
@@ -59,6 +74,7 @@ public class UsrArticleController {
 
 		return id + "번 게시물을 삭제하였습니다.";
 	}
+	
 
 	@RequestMapping("/usr/article/doModify")
 	@ResponseBody
