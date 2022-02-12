@@ -5,20 +5,20 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 
 public class Member {
-	
 	private int id;
 	private String regDate;
-	private String upDate;
+	private String updateDate;
 	private String loginId;
 	private String loginPw;
+	private int authLeve;
 	private String name;
 	private String nickname;
 	private String cellphoneNo;
 	private String email;
 	private boolean delStatus;
-	private boolean delDate;
+	private String delDate;
 }
