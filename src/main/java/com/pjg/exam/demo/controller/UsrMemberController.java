@@ -17,6 +17,7 @@ public class UsrMemberController {
 	public UsrMemberController(MemberService memberService) {
 		this.memberService = memberService;
 	}
+	@SuppressWarnings("unchecked")
 	@RequestMapping("/usr/member/doJoin")
 	@ResponseBody
 	public ResultData<Member> doJoin(String loginId, String loginPw, String name, String nickname, String cellphoneNo,
@@ -44,7 +45,7 @@ public class UsrMemberController {
 			return (ResultData) joinRd;
 		}
 		Member member = memberService.getMemberById(joinRd.getData1());
-		return ResultData.newData(joinRd, member);
+		return ResultData.newData(joinRd,"member", member);
 	}
 	
 	@RequestMapping("/usr/member/doLogout")
