@@ -19,7 +19,7 @@
 </head>
 <body>
   <header>
-    <div class="h-20 flex container mx-auto bg-blue-800">
+    <div class="h-20 flex container mx-auto bg-blue-500">
       <a href="/" class="flex items-center px-3">
         <span>로고</span>
       </a>
