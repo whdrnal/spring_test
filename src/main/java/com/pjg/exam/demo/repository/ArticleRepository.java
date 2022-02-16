@@ -25,6 +25,7 @@ public interface ArticleRepository {
 	public void deleteArticle(@Param("id") int id);
 
 	public void modifyArticle(@Param("id") int id, @Param("title") String title, @Param("body") String body);
+
 	@Select("""
 			SELECT A.*,
 			M.nickname AS extra__writerName
@@ -34,5 +35,6 @@ public interface ArticleRepository {
 			ORDER BY A.id DESC
 			""")
 	public List<Article> getArticles();
+
 	public int getLastInsertId();
 }
