@@ -24,7 +24,7 @@ public class MyWebMvcConfigurer implements WebMvcConfigurer {
 		registry.addInterceptor(beforeActionInterceptor).addPathPatterns("/**").excludePathPatterns("/resource/**")
 				.excludePathPatterns("/error");
 		
-		
+		// 아래코드로 들어가는 URL 빼고는 간섭하지 않는다.
 		registry.addInterceptor(needLoginInterceptor).addPathPatterns("/usr/article/write")
 													 .addPathPatterns("/usr/article/doWrite")
 													 .addPathPatterns("/usr/article/modify")

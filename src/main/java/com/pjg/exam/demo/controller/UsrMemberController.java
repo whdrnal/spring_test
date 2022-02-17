@@ -1,5 +1,6 @@
 package com.pjg.exam.demo.controller;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
@@ -10,16 +11,20 @@ import com.pjg.exam.demo.service.MemberService;
 import com.pjg.exam.demo.util.Ut;
 import com.pjg.exam.demo.vo.Member;
 import com.pjg.exam.demo.vo.ResultData;
+import com.pjg.exam.demo.vo.Rq;
 
 @Controller
 public class UsrMemberController {
 	private MemberService memberService;
+	
 	public UsrMemberController(MemberService memberService) {
-		this.memberService = memberService;
+		   this.memberService = memberService;
 	}
+	
 	@SuppressWarnings("unchecked")
 	@RequestMapping("/usr/member/doJoin")
 	@ResponseBody
+	
 	public ResultData<Member> doJoin(String loginId, String loginPw, String name, String nickname, String cellphoneNo,
 			String email) {
 		if (Ut.empty(loginId)) {
@@ -74,14 +79,10 @@ public class UsrMemberController {
 	
 	@RequestMapping("/usr/member/doLogin")
 	@ResponseBody
-	public String doLogin(HttpSession httpSession, String loginId, String loginPw) {
-		boolean isLogined = false;
+	public String doLogin(HttpServletRequest req, String loginId, String loginPw) {
+		Rq rq = (Rq) req.getAttribute("rq");
 
-		if (httpSession.getAttribute("loginedMemberId") != null) {
-			isLogined = true;
-		}
-
-		if (isLogined) {
+		if (rq.isLogined()) {
 			return Ut.jsHistoryBack("이미 로그인되었습니다.");
 		}
 
@@ -103,7 +104,7 @@ public class UsrMemberController {
 			return Ut.jsHistoryBack("비밀번호가 일치하지 않습니다.");
 		}
 
-		httpSession.setAttribute("loginedMemberId", member.getId());
+		rq.login(member);
 
 		return Ut.jsReplace(Ut.f("%s님 환영합니다.", member.getNickname()), "/");
 	}
