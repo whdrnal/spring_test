@@ -15,7 +15,6 @@ public class MemberService {
 		this.memberRepository = memberRepository;
 	}
 
-	@SuppressWarnings("unchecked")
 	public ResultData<Integer> join(String loginId, String loginPw, String name, String nickname, String cellphoneNo,
 			String email) {
 		// 로그인아이디 중복체크
@@ -35,7 +34,7 @@ public class MemberService {
 		memberRepository.join(loginId, loginPw, name, nickname, cellphoneNo, email);
 		int id = memberRepository.getLastInsertId();
 
-		return ResultData.from("S-1", "회원가입이 완료되었습니다.","id", id);
+		return ResultData.from("S-1", "회원가입이 완료되었습니다.", "id", id);
 	}
 
 	private Member getMemberByNameAndEmail(String name, String email) {

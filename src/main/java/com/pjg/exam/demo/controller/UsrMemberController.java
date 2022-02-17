@@ -16,43 +16,49 @@ import com.pjg.exam.demo.vo.Rq;
 @Controller
 public class UsrMemberController {
 	private MemberService memberService;
-	
+
 	public UsrMemberController(MemberService memberService) {
-		   this.memberService = memberService;
+		this.memberService = memberService;
 	}
-	
-	@SuppressWarnings("unchecked")
+
 	@RequestMapping("/usr/member/doJoin")
 	@ResponseBody
-	
 	public ResultData<Member> doJoin(String loginId, String loginPw, String name, String nickname, String cellphoneNo,
 			String email) {
 		if (Ut.empty(loginId)) {
 			return ResultData.from("F-1", "loginId(을)를 입력해주세요.");
 		}
+
 		if (Ut.empty(loginPw)) {
 			return ResultData.from("F-2", "loginPw(을)를 입력해주세요.");
 		}
+
 		if (Ut.empty(name)) {
 			return ResultData.from("F-3", "name(을)를 입력해주세요.");
 		}
+
 		if (Ut.empty(nickname)) {
 			return ResultData.from("F-4", "nickname(을)를 입력해주세요.");
 		}
+
 		if (Ut.empty(cellphoneNo)) {
 			return ResultData.from("F-5", "cellphoneNo(을)를 입력해주세요.");
 		}
+
 		if (Ut.empty(email)) {
 			return ResultData.from("F-6", "email(을)를 입력해주세요.");
 		}
+
 		ResultData<Integer> joinRd = memberService.join(loginId, loginPw, name, nickname, cellphoneNo, email);
+
 		if (joinRd.isFail()) {
 			return (ResultData) joinRd;
 		}
+
 		Member member = memberService.getMemberById(joinRd.getData1());
-		return ResultData.newData(joinRd,"member", member);
+		return ResultData.newData(joinRd, "member", member);
 	}
-	
+
 	@RequestMapping("/usr/member/doLogout")
 	@ResponseBody
 	public String doLogout(HttpServletRequest req) {
@@ -66,13 +72,12 @@ public class UsrMemberController {
 
 		return Ut.jsReplace("로그아웃 되었습니다.", "/");
 	}
-	
-	
+
 	@RequestMapping("/usr/member/login")
-	public String showLogin(){
+	public String showLogin() {
 		return "usr/member/login";
 	}
-	
+
 	@RequestMapping("/usr/member/doLogin")
 	@ResponseBody
 	public String doLogin(HttpServletRequest req, String loginId, String loginPw) {
