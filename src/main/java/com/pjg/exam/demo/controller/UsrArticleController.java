@@ -25,10 +25,10 @@ public class UsrArticleController {
 	public ResultData<Article> doAdd(HttpServletRequest req, String title, String body) {
 		Rq rq = (Rq) req.getAttribute("rq");
 		if (Ut.empty(title)) {
-			return ResultData.from("F-1", "title(을)를 입력해주세요.");
+			return ResultData.from("F-1", "title(을)를 입력해주세요!");
 		}
 		if (Ut.empty(body)) {
-			return ResultData.from("F-2", "body(을)를 입력해주세요.");
+			return ResultData.from("F-2", "body(을)를 입력해주세요!");
 		}
 		ResultData<Integer> writeArticleRd = articleService.writeArticle(rq.getLoginedMemberId(), title, body);
 		int id = writeArticleRd.getData1();
