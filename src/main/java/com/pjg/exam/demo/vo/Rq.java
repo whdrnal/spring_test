@@ -16,7 +16,6 @@ import com.pjg.exam.demo.util.Ut;
 import lombok.Getter;
 
 
-
 @Component
 @Scope(value = "request", proxyMode = ScopedProxyMode.TARGET_CLASS)
 public class Rq {
