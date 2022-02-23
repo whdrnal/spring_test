@@ -1,14 +1,23 @@
 package com.pjg.exam.demo.vo;
 
 import java.io.IOException;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.context.annotation.Scope;
+import org.springframework.context.annotation.ScopedProxyMode;
+import org.springframework.stereotype.Component;
+
 import com.pjg.exam.demo.service.MemberService;
 import com.pjg.exam.demo.util.Ut;
+
 import lombok.Getter;
 
+
+@Component
+@Scope(value = "request", proxyMode = ScopedProxyMode.TARGET_CLASS)
 public class Rq {
 	@Getter
 	private boolean isLogined;
@@ -47,8 +56,11 @@ public class Rq {
 
 	public void print(String str) {
 		try {
+			
 			resp.getWriter().append(str);
+			
 		} catch (IOException e) {
+			
 			e.printStackTrace();
 		}
 	}
@@ -69,6 +81,7 @@ public class Rq {
 		
 		req.setAttribute("msg", msg);
 		req.setAttribute("historyBack", true);
+		
 		return "common/js";
 	}
 
