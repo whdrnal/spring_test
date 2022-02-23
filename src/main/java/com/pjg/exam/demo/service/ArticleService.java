@@ -12,20 +12,26 @@ import com.pjg.exam.demo.vo.ResultData;
 @Service
 public class ArticleService {
 	private ArticleRepository articleRepository;
-
 	public ArticleService(ArticleRepository articleRepository) {
 		this.articleRepository = articleRepository;
 	}
-
 	public ResultData<Integer> writeArticle(int memberId, int boardId, String title, String body) {
 		articleRepository.writeArticle(memberId, boardId, title, body);
 		int id = articleRepository.getLastInsertId();
-
 		return ResultData.from("S-1", Ut.f("%d번 게시물이 생성되었습니다.", id), "id", id);
 	}
 
-	public List<Article> getForPrintArticles(int actorId, int boardId) {
-		List<Article> articles = articleRepository.getArticles(boardId);
+	public List<Article> getForPrintArticles(int actorId, int boardId, int itemsCountInAPage, int page) {
+		/*
+		 * SELECT * FROM article WHERE boardId = 1 ORDER BY id DESC LIMIT 0, 10
+		 * () 계산 후 * 한 값 limitStart = 페이지 번호  
+		 * limitTake = 계산된 페이지 보여줄 갯수
+		 */
+
+		int limitStart = (page - 1) * itemsCountInAPage;
+		int limitTake = itemsCountInAPage;
+
+		List<Article> articles = articleRepository.getArticles(boardId, limitStart, limitTake);
 
 		for (Article article : articles) {
 			updateForPrintData(actorId, article);
@@ -53,7 +59,6 @@ public class ArticleService {
 		ResultData actorCanModifyRd = actorCanModify(actorId, article);
 		article.setExtra__actorCanModify(actorCanModifyRd.isSuccess());
 	}
-
 	public void deleteArticle(int id) {
 		articleRepository.deleteArticle(id);
 	}
@@ -67,7 +72,6 @@ public class ArticleService {
 	}
 
 	public ResultData actorCanModify(int actorId, Article article) {
-
 		if (article == null) {
 			return ResultData.from("F-1", "게시물이 존재하지 않습니다.");
 		}
@@ -80,7 +84,6 @@ public class ArticleService {
 	}
 
 	public ResultData actorCanDelete(int actorId, Article article) {
-
 		if (article == null) {
 			return ResultData.from("F-1", "게시물이 존재하지 않습니다.");
 		}
@@ -95,5 +98,4 @@ public class ArticleService {
 	public int getArticlesCount(int boardId) {
 		return articleRepository.getArticlesCount(boardId);
 	}
-
 }
