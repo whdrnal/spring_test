@@ -15,6 +15,7 @@ import com.pjg.exam.demo.vo.Board;
 import com.pjg.exam.demo.vo.ResultData;
 import com.pjg.exam.demo.vo.Rq;
 
+
 @Controller
 public class UsrArticleController {
 	

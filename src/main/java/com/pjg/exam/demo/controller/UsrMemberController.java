@@ -13,6 +13,7 @@ import com.pjg.exam.demo.vo.Member;
 import com.pjg.exam.demo.vo.ResultData;
 import com.pjg.exam.demo.vo.Rq;
 
+
 @Controller
 public class UsrMemberController {
 	private MemberService memberService;
