@@ -40,9 +40,11 @@
 
 		<div class="page-menu mt-3">
 			<div class="btn-group justify-center">
-				<c:forEach begin="1" end="20" var="i">
+					<!--  시작 begin = 1 끝 end = ${pagesCount} var = i? -->
+					<c:forEach begin="1" end="${pagesCount}" var="i">
+					
 					<!-- 해당 페이지 번호 눌렀을시 참이면 'btn-active' 거짓이면 계속 ' ' 만 보여지도록  -->
-					<a class="btn btn-sm ${param.page == i ? 'btn-active' : ''}" href="?page=${i}">${i}</a>
+					<a class="btn btn-sm ${page == i ? 'btn-active' : ''}" href="?page=${i}">${i}</a>
 				</c:forEach>
 			</div>
 		</div>
