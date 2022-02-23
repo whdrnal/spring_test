@@ -19,7 +19,7 @@ public class UsrArticleController {
 	private ArticleService articleService;
 	// 액션 메서드 시작
 	
-	@SuppressWarnings("unchecked")  // 노란 줄 주석  	 	
+	@SuppressWarnings("unchecked") 	
 	@RequestMapping("/usr/article/doAdd")
 	@ResponseBody
 	public ResultData<Article> doAdd(HttpServletRequest req, String title, String body) {
@@ -145,5 +145,10 @@ public class UsrArticleController {
 
 		return Ut.jsReplace(Ut.f("%d번 글이 수정되었습니다.", id), Ut.f("../article/detail?id=%d", id));
 		
+	}
+	
+	@RequestMapping("/usr/article/write")
+	public String showWrite(HttpServletRequest req, Model model) {
+		return "usr/article/write";
 	}
 }
