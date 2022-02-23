@@ -10,6 +10,7 @@ import org.springframework.web.servlet.HandlerInterceptor;
 import com.pjg.exam.demo.service.MemberService;
 import com.pjg.exam.demo.vo.Rq;
 
+
 @Component
 public class BeforeActionInterceptor implements HandlerInterceptor {
 	private Rq rq;

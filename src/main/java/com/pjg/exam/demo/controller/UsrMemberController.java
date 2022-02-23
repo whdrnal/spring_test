@@ -79,6 +79,7 @@ public class UsrMemberController {
 		return "usr/member/login";
 	}
 
+	
 	@RequestMapping("/usr/member/doLogin")
 	@ResponseBody
 	public String doLogin(String loginId, String loginPw) {

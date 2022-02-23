@@ -55,7 +55,7 @@
           </a>
         </li>
         
-        <!-- 로그인 단 -->
+        <!-- 로그인 단 --> 
         <c:if test="${!rq.isLogined()}">
         <li>
           <a class="h-full flex px-3 items-center hover:underline" href="/usr/member/login">
