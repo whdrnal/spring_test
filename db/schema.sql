@@ -1,7 +1,7 @@
 # DB 생성
-DROP DATABASE IF EXISTS spring_test
-CREATE DATABASE spring_test
-USE spring_test
+DROP DATABASE IF EXISTS spring_test;
+CREATE DATABASE spring_test;
+USE spring_test;
 
 # 게시물 테이블 생성
 CREATE TABLE article (
@@ -11,6 +11,7 @@ CREATE TABLE article (
     title CHAR(100) NOT NULL,
     `body` TEXT NOT NULL
 );
+
 # 게시물, 테스트 데이터 생성
 INSERT INTO article
 SET regDate = NOW(),
@@ -56,7 +57,7 @@ authLevel = 7,
 `name` = '관리자',
 nickname = '관리자',
 cellphoneNo = '01011111111',
-email = 'jangka512@gmail.com';
+email = 'whdrnal34@gmail.com';
 
 # 회원, 테스트 데이터 생성(일반 회원)
 INSERT INTO `member`
@@ -67,7 +68,8 @@ loginPw = 'user1',
 `name` = '사용자1',
 nickname = '사용자1',
 cellphoneNo = '01011111111',
-email = 'jangka512@gmail.com';
+email = 'whdrnal34@gmail.com';
+
 INSERT INTO `member`
 SET regDate = NOW(),
 updateDate = NOW(),
@@ -132,6 +134,7 @@ insert into article
 select now(), now(), FLOOR(RAND() * 2) + 1, FLOOR(RAND() * 2) + 1, concat('제목_', rand()), CONCAT('내용_', RAND())
 from article;
 */
+
 
 # 게시물 테이블 hitCount 칼럼을 추가
 ALTER TABLE article
