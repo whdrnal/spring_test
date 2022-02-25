@@ -1,7 +1,9 @@
 package com.pjg.exam.demo.vo;
 
 import lombok.Getter;
+import lombok.ToString;
 
+@ToString 
 public class ResultData<DT> {
 	@Getter
 	private String resultCode;
