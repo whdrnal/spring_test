@@ -54,8 +54,6 @@
             <span>자유 게시판</span>
           </a>
         </li>
-        
-        <!-- 로그인 단 -->
         <c:if test="${!rq.isLogined()}">
         <li>
           <a class="h-full flex px-3 items-center hover:underline" href="/usr/member/login">
@@ -70,8 +68,6 @@
           </a>
         </li>
         </c:if>
-        <!-- 로그인 끝 -->
-        
       </ul>
     </div>
   </header>

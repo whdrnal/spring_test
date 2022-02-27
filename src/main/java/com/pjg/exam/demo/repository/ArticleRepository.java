@@ -1,6 +1,8 @@
 package com.pjg.exam.demo.repository;
 import java.util.List;
 
+import org.apache.ibatis.annotations.Delete;
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
@@ -12,6 +14,7 @@ import com.pjg.exam.demo.vo.Article;
 public interface ArticleRepository {
 	public void writeArticle(@Param("memberId") int memberId, @Param("boardId") int boardId,
 			@Param("title") String title, @Param("body") String body);
+
 	@Select("""
 			SELECT A.*,
 			M.nickname AS extra__writerName
@@ -22,8 +25,11 @@ public interface ArticleRepository {
 			AND A.id = #{id}
 			""")
 	public Article getForPrintArticle(@Param("id") int id);
+
 	public void deleteArticle(@Param("id") int id);
+
 	public void modifyArticle(@Param("id") int id, @Param("title") String title, @Param("body") String body);
+
 	@Select("""
 			<script>
 			SELECT A.*,
@@ -48,7 +54,7 @@ public interface ArticleRepository {
 							A.title LIKE CONCAT('%', #{searchKeyword}, '%')
 							OR
 							A.body LIKE CONCAT('%', #{searchKeyword}, '%')
-							)
+						)
 					</otherwise>
 				</choose>
 			</if>
@@ -91,26 +97,22 @@ public interface ArticleRepository {
 			</script>
 			""")
 	public int getArticlesCount(int boardId, String searchKeywordTypeCode, String searchKeyword);
-	
+
 	@Update("""
-			
 			<script>
 			UPDATE article
-			   SET hitCount = hitCount + 1
-			 WHERE id = #{id}
+			SET hitCount = hitCount + 1
+			WHERE id = #{id}
 			</script>
-			
-			""")	
+			""")
 	public int increaseHitCount(int id);
-	
+
 	@Select("""
-			
 			<script>
 			SELECT hitCount
 			FROM article
 			WHERE id = #{id}
 			</script>
-			
 			""")
 	public int getArticleHitCount(int id);
 }

@@ -13,7 +13,7 @@ public class BoardService {
 	public BoardService(BoardRepository boardRepository) {
 		this.boardRepository = boardRepository;
 	}
-
+	
 	public Board getBoardById(int id) {
 		return boardRepository.getBoardById(id);
 	}

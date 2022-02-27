@@ -15,7 +15,6 @@ import com.pjg.exam.demo.util.Ut;
 
 import lombok.Getter;
 
-
 @Component
 @Scope(value = "request", proxyMode = ScopedProxyMode.TARGET_CLASS)
 public class Rq {
@@ -24,23 +23,28 @@ public class Rq {
 	@Getter
 	private int loginedMemberId;
 	@Getter
-	
 	private Member loginedMember;
+
 	private HttpServletRequest req;
 	private HttpServletResponse resp;
 	private HttpSession session;
+
 	public Rq(HttpServletRequest req, HttpServletResponse resp, MemberService memberService) {
 		this.req = req;
 		this.resp = resp;
+
 		this.session = req.getSession();
+
 		boolean isLogined = false;
 		int loginedMemberId = 0;
 		Member loginedMember = null;
+
 		if (session.getAttribute("loginedMemberId") != null) {
 			isLogined = true;
 			loginedMemberId = (int) session.getAttribute("loginedMemberId");
 			loginedMember = memberService.getMemberById(loginedMemberId);
 		}
+
 		this.isLogined = isLogined;
 		this.loginedMemberId = loginedMemberId;
 		this.loginedMember = loginedMember;
@@ -52,6 +56,7 @@ public class Rq {
 		resp.setContentType("text/html; charset=UTF-8");
 		print(Ut.jsHistoryBack(msg));
 	}
+
 	public void print(String str) {
 		try {
 			resp.getWriter().append(str);
@@ -59,23 +64,29 @@ public class Rq {
 			e.printStackTrace();
 		}
 	}
+
 	public void println(String str) {
 		print(str + "\n");
 	}
+
 	public void login(Member member) {
 		session.setAttribute("loginedMemberId", member.getId());
 	}
+
 	public void logout() {
 		session.removeAttribute("loginedMemberId");
 	}
+
 	public String historyBackJsOnView(String msg) {
 		req.setAttribute("msg", msg);
 		req.setAttribute("historyBack", true);
 		return "common/js";
 	}
+
 	public String jsHistoryBack(String msg) {
 		return Ut.jsHistoryBack(msg);
 	}
+
 	public String jsReplace(String msg, String uri) {
 		return Ut.jsReplace(msg, uri);
 	}
