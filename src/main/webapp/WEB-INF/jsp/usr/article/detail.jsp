@@ -35,7 +35,7 @@
 	})
 </script>
 
-<!-- 조회 Ajax 처리  -->
+<!-- 조회 Ajax 처리 끝 -->
 
 <section class="mt-5">
     <div class="container mx-auto px-3">
