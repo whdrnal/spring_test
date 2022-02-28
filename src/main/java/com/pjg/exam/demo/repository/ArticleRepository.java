@@ -14,7 +14,7 @@ import com.pjg.exam.demo.vo.Article;
 @Mapper
 public interface ArticleRepository {
 	public void writeArticle(@Param("memberId") int memberId, @Param("boardId") int boardId,
-			@Param("title") String title, @Param("body") String body);
+							@Param("title") String title, @Param("body") String body);
 	@Select("""
 			<script>
 			SELECT A.*,
@@ -64,9 +64,9 @@ public interface ArticleRepository {
 			</if>
 			</script>
 			""")
-	public List<Article> getForPrintArticles(int boardId, String searchKeywordTypeCode, String searchKeyword,
-			int limitStart, int limitTake);
+	public List<Article> getForPrintArticles(int boardId, String searchKeywordTypeCode, String searchKeyword, int limitStart, int limitTake);
 	public int getLastInsertId();
+	
 	@Select("""
 			<script>
 			SELECT COUNT(*) AS cnt
@@ -95,6 +95,7 @@ public interface ArticleRepository {
 			</script>
 			""")
 	public int getArticlesCount(int boardId, String searchKeywordTypeCode, String searchKeyword);
+	
 	@Update("""
 			<script>
 			UPDATE article
@@ -103,6 +104,7 @@ public interface ArticleRepository {
 			</script>
 			""")
 	public int increaseHitCount(int id);
+	
 	@Select("""
 			<script>
 			SELECT hitCount
@@ -129,4 +131,22 @@ public interface ArticleRepository {
 			</script>
 			""")
 	public int increaseBadReactionPoint(int id);
+	
+	@Update("""
+			<script>
+			UPDATE article
+			SET goodReactionPoint = goodReactionPoint - 1
+			WHERE id = #{id}
+			</script>
+			""")
+	public int decreaseGoodReactionPoint(int id);
+
+	@Update("""
+			<script>
+			UPDATE article
+			SET badReactionPoint = badReactionPoint - 1
+			WHERE id = #{id}
+			</script>
+			""")
+	public int decreaseBadReactionPoint(int id);
 }
