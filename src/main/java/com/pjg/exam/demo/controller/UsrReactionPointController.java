@@ -49,7 +49,8 @@ public class UsrReactionPointController {
 	@RequestMapping("/usr/reactionPoint/doCancelGoodReaction")
 	@ResponseBody
 	String doCancelGoodReaction(String relTypeCode, int relId, String replaceUri) {
-		ResultData actorCanMakeReactionPointRd = reactionPointService.actorCanMakeReactionPoint(rq.getLoginedMemberId(), relTypeCode, relId);
+		ResultData actorCanMakeReactionPointRd = reactionPointService.actorCanMakeReactionPoint(rq.getLoginedMemberId(),
+				relTypeCode, relId);
 
 		if (actorCanMakeReactionPointRd.isSuccess()) {
 			return rq.jsHistoryBack("이미 취소되었습니다.");
@@ -63,7 +64,8 @@ public class UsrReactionPointController {
 	@RequestMapping("/usr/reactionPoint/doCancelBadReaction")
 	@ResponseBody
 	String doCancelBadReaction(String relTypeCode, int relId, String replaceUri) {
-		ResultData actorCanMakeReactionPointRd = reactionPointService.actorCanMakeReactionPoint(rq.getLoginedMemberId(), relTypeCode, relId);
+		ResultData actorCanMakeReactionPointRd = reactionPointService.actorCanMakeReactionPoint(rq.getLoginedMemberId(),
+				relTypeCode, relId);
 
 		if (actorCanMakeReactionPointRd.isSuccess()) {
 			return rq.jsHistoryBack("이미 취소되었습니다.");

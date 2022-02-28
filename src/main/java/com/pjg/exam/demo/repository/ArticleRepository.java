@@ -132,6 +132,7 @@ public interface ArticleRepository {
 			""")
 	public int increaseBadReactionPoint(int id);
 	
+
 	@Update("""
 			<script>
 			UPDATE article

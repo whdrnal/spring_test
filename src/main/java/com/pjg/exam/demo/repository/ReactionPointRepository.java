@@ -40,9 +40,9 @@ public interface ReactionPointRepository {
 
 	@Delete("""
 			DELETE FROM reactionPoint
-			WHERE relTypeCode = #{reactionPoint}
-			AND redId = #{relId}
+			WHERE relTypeCode = #{relTypeCode}
+			AND relId = #{relId}
 			AND memberId = #{memberId}
-			""")	
+			""")
 	void deleteReactionPoint(int memberId, String relTypeCode, int relId);
 }
