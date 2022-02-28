@@ -64,11 +64,11 @@ public class ArticleService {
 	}
 
 	public ResultData actorCanModify(int actorId, Article article) {
-		
+
 		if (article == null) {
 			return ResultData.from("F-1", "게시물이 존재하지 않습니다.");
 		}
-		
+
 		if (article.getMemberId() != actorId) {
 			return ResultData.from("F-2", "권한이 없습니다.");
 		}
@@ -76,15 +76,15 @@ public class ArticleService {
 	}
 
 	public ResultData actorCanDelete(int actorId, Article article) {
-		
+
 		if (article == null) {
 			return ResultData.from("F-1", "게시물이 존재하지 않습니다.");
 		}
-		
+
 		if (article.getMemberId() != actorId) {
 			return ResultData.from("F-2", "권한이 없습니다.");
 		}
-		
+
 		return ResultData.from("S-1", "게시물 삭제가 가능합니다.");
 	}
 
@@ -93,12 +93,12 @@ public class ArticleService {
 	}
 
 	public ResultData<Integer> increaseHitCount(int id) {
-		
+
 		int affectedRowsCount = articleRepository.increaseHitCount(id);
 		if (affectedRowsCount == 0) {
 			return ResultData.from("F-1", "해당 게시물이 존재하지 않습니다.", "affectedRowsCount", affectedRowsCount);
 		}
-		
+
 		return ResultData.from("S-1", "조회수가 증가되었습니다.", "affectedRowsCount", affectedRowsCount);
 	}
 
