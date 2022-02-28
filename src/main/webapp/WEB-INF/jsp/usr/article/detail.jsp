@@ -39,27 +39,27 @@
 <!-- 댓글 작성 스크립트 ↓ -->
 <script>
   // 댓글작성 관련
-  let ReplyWrite__submitFormDone = false; 
+  let ReplyWrite__submitFormDone = false;
   function ReplyWrite__submitForm(form) {
-    if ( ReplyWrite__submitFormDone ) {
+    if (ReplyWrite__submitFormDone) {
       return;
     }
-    
+
     // 좌우공백 제거
     form.body.value = form.body.value.trim();
-    
-    if ( form.body.value.length == 0 ) {
+
+    if (form.body.value.length == 0) {
       alert('댓글을 입력해주세요.');
       form.body.focus();
       return;
     }
-    
-    if ( form.body.value.length < 2 ) {
+
+    if (form.body.value.length < 2) {
       alert('댓글내용을 2자이상 입력해주세요.');
       form.body.focus();
       return;
     }
-    
+
     ReplyWrite__submitFormDone = true;
     form.submit();
   }
