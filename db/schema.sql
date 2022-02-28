@@ -11,20 +11,17 @@ CREATE TABLE article (
     title CHAR(100) NOT NULL,
     `body` TEXT NOT NULL
 );
-
 # 게시물, 테스트 데이터 생성
 INSERT INTO article
 SET regDate = NOW(),
 updateDate = NOW(),
 title = '제목 1',
 `body` = '내용 1';
-
 INSERT INTO article
 SET regDate = NOW(),
 updateDate = NOW(),
 title = '제목 2',
 `body` = '내용 2';
-
 INSERT INTO article
 SET regDate = NOW(),
 updateDate = NOW(),
@@ -69,7 +66,6 @@ loginPw = 'user1',
 nickname = '사용자1',
 cellphoneNo = '01011111111',
 email = 'whdrnal34@gmail.com';
-
 INSERT INTO `member`
 SET regDate = NOW(),
 updateDate = NOW(),
@@ -105,7 +101,6 @@ SET regDate = NOW(),
 updateDate = NOW(),
 `code` = 'notice',
 `name` = '공지사항';
-
 INSERT INTO board
 SET regDate = NOW(),
 updateDate = NOW(),
@@ -135,11 +130,9 @@ select now(), now(), FLOOR(RAND() * 2) + 1, FLOOR(RAND() * 2) + 1, concat('제�
 from article;
 */
 
-
 # 게시물 테이블 hitCount 칼럼을 추가
 ALTER TABLE article
 ADD COLUMN hitCount INT(10) UNSIGNED NOT NULL DEFAULT 0;
-
 
 # 리액션포인트 테이블
 CREATE TABLE reactionPoint (
@@ -229,3 +222,46 @@ INNER JOIN (
 ON A.id = RP_SUM.relId
 SET A.goodReactionPoint = RP_SUM.goodReactionPoint,
 A.badReactionPoint = RP_SUM.badReactionPoint;
+
+# 리액션포인트 테이블
+CREATE TABLE reply (
+    id INT(10) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    regDate DATETIME NOT NULL,
+    updateDate DATETIME NOT NULL,
+    memberId INT(10) UNSIGNED NOT NULL,
+    relTypeCode CHAR(30) NOT NULL COMMENT '관련데이터타입코드',
+    relId INT(10) UNSIGNED NOT NULL COMMENT '관련데이터번호',
+    `body` TEXT NOT NULL
+);
+
+INSERT INTO reply
+SET regDate = NOW(),
+updateDate = NOW(),
+memberId = 1,
+relTypeCode = 'article',
+relId = 1,
+`body` = '댓글 1';
+
+INSERT INTO reply
+SET regDate = NOW(),
+updateDate = NOW(),
+memberId = 1,
+relTypeCode = 'article',
+relId = 1,
+`body` = '댓글 2';
+
+INSERT INTO reply
+SET regDate = NOW(),
+updateDate = NOW(),
+memberId = 2,
+relTypeCode = 'article',
+relId = 1,
+`body` = '댓글 3';
+
+INSERT INTO reply
+SET regDate = NOW(),
+updateDate = NOW(),
+memberId = 3,
+relTypeCode = 'article',
+relId = 2,
+`body` = '댓글 4';
