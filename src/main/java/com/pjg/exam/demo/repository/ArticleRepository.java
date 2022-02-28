@@ -15,7 +15,6 @@ import com.pjg.exam.demo.vo.Article;
 public interface ArticleRepository {
 	public void writeArticle(@Param("memberId") int memberId, @Param("boardId") int boardId,
 			@Param("title") String title, @Param("body") String body);
-
 	@Select("""
 			<script>
 			SELECT A.*,
@@ -33,13 +32,10 @@ public interface ArticleRepository {
 			AND A.id = #{id}
 			GROUP BY A.id
 			</script>
-			   """)
+			""")
 	public Article getForPrintArticle(@Param("id") int id);
-
 	public void deleteArticle(@Param("id") int id);
-
 	public void modifyArticle(@Param("id") int id, @Param("title") String title, @Param("body") String body);
-
 	@Select("""
 			<script>
 			SELECT A.*,
@@ -116,7 +112,6 @@ public interface ArticleRepository {
 			</script>
 			""")
 	public int getArticlesCount(int boardId, String searchKeywordTypeCode, String searchKeyword);
-
 	@Update("""
 			<script>
 			UPDATE article
@@ -125,7 +120,6 @@ public interface ArticleRepository {
 			</script>
 			""")
 	public int increaseHitCount(int id);
-
 	@Select("""
 			<script>
 			SELECT hitCount
@@ -134,4 +128,15 @@ public interface ArticleRepository {
 			</script>
 			""")
 	public int getArticleHitCount(int id);
+
+	@Select("""
+			<script>
+			SELECT IFNULL(SUM(RP.point), 0) AS s
+			FROM reactionPoint AS RP
+			WHERE RP.relTypeCode = 'article'
+			AND RP.relId = #{id}
+			AND RP.memberId = #{memberId}
+			</script>
+			""")
+	public int getSumReactionPointByMemberId(int id, int memberId);
 }
