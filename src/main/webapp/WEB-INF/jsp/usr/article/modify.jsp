@@ -1,12 +1,32 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-
 <c:set var="pageTitle" value="게시물 수정" />
 <%@ include file="../common/head.jspf"%>
 
+<script>
+  let ArticleModify__submitDone = false;
+  function ArticleModify__submit(form) {
+    if ( ArticleModify__submitDone ) {
+      return;
+    }
+    
+    form.body.value = form.body.value.trim();
+    
+    if ( form.body.value.length == 0 ) {
+      alert('내용을 입력해주세요.')
+      form.body.focus();
+      
+      return;
+    }
+    
+    ArticleModify__submitDone = true;
+    form.submit();
+  }
+</script>
+
 <section class="mt-5">
   <div class="container mx-auto px-3">
-    <form class="table-box-type-1" method="POST" action="../article/doModify">
+    <form class="table-box-type-1" method="POST" action="../article/doModify" onsubmit="ArticleModify__submitDone">
       <input type="hidden" name="id" value="${article.id}" />
       <table>
         <colgroup>
@@ -35,6 +55,18 @@
             <th>작성자</th>
             <td>
               ${article.extra__writerName}
+            </td>
+          </tr>
+          <tr>
+            <th>조회</th>
+            <td>
+              <span class="badge badge-primary">${article.hitCount}</span>
+            </td>
+          </tr>
+          <tr>
+            <th>추천</th>
+            <td>
+              <span class="badge badge-primary">${article.goodReactionPoint}</span>
             </td>
           </tr>
           <tr>
@@ -71,5 +103,4 @@
     </div>
   </div>
 </section>
-
 <%@ include file="../common/foot.jspf"%>

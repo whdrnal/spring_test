@@ -1,11 +1,14 @@
 package com.pjg.exam.demo.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.pjg.exam.demo.service.ArticleService;
 import com.pjg.exam.demo.service.ReplyService;
 import com.pjg.exam.demo.util.Ut;
+import com.pjg.exam.demo.vo.Article;
 import com.pjg.exam.demo.vo.Reply;
 import com.pjg.exam.demo.vo.ResultData;
 import com.pjg.exam.demo.vo.Rq;
@@ -13,11 +16,45 @@ import com.pjg.exam.demo.vo.Rq;
 @Controller
 public class UsrReplyController {
 	private ReplyService replyService;
+	private ArticleService articleService;
 	private Rq rq;
-	public UsrReplyController(ReplyService replyService, Rq rq) {
+
+	public UsrReplyController(ReplyService replyService, ArticleService articleService, Rq rq) {
 		this.replyService = replyService;
+		this.articleService = articleService;
 		this.rq = rq;
 	}
+
+	@RequestMapping("/usr/reply/modify")
+	public String modify(int id, String replaceUri, Model model) {
+		if (Ut.empty(id)) {
+			return rq.jsHistoryBack("id(을)를 입력해주세요.");
+		}
+
+		Reply reply = replyService.getForPrintReply(rq.getLoginedMember(), id);
+
+		if (reply == null) {
+			return rq.historyBackJsOnView(Ut.f("%d번 댓글은 존재하지 않습니다.", id));
+		}
+
+		if (reply.isExtra__actorCanModify() == false) {
+			return rq.historyBackJsOnView(Ut.f("%d번 댓글을 수정할 권한이 없습니다.", id));
+		}
+
+		String relDataTitle = null;
+
+		switch (reply.getRelTypeCode()) {
+		case "article":
+			Article article = articleService.getArticle(reply.getRelId());
+			relDataTitle = article.getTitle();
+		}
+
+		model.addAttribute("relDataTitle", relDataTitle);
+		model.addAttribute("reply", reply);
+
+		return "usr/reply/modify";
+	}
+
 	@RequestMapping("/usr/reply/doWrite")
 	@ResponseBody
 	public String doWrite(String relTypeCode, int relId, String body, String replaceUri) {
@@ -52,11 +89,11 @@ public class UsrReplyController {
 
 		Reply reply = replyService.getForPrintReply(rq.getLoginedMember(), id);
 
-		if (reply == null ) {
+		if (reply == null) {
 			return rq.jsHistoryBack(Ut.f("%d번 댓글은 존재하지 않습니다.", id));
 		}
 
-		if ( reply.isExtra__actorCanDelete() == false ) {
+		if (reply.isExtra__actorCanDelete() == false) {
 			return rq.jsHistoryBack(Ut.f("%d번 댓글을 삭제할 권한이 없습니다.", id));
 		}
 
@@ -69,7 +106,6 @@ public class UsrReplyController {
 				break;
 			}
 		}
-
 		return rq.jsReplace(deleteReplyRd.getMsg(), replaceUri);
 	}
 }
