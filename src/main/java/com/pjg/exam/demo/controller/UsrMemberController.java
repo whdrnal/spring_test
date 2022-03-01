@@ -113,6 +113,7 @@ public class UsrMemberController {
 	
 	@RequestMapping("/usr/member/myPage")
 	public String showMyPage() {
+		
 		return "usr/member/myPage";
 	}
 }

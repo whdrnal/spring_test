@@ -2,7 +2,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <c:set var="pageTitle" value="마이페이지" />
 <%@ include file="../common/head.jspf"%>
-
 <section class="mt-5">
 	<div class="container mx-auto px-3">
 		<div class="table-box-type-1">
