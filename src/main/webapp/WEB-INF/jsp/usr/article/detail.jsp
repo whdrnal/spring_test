@@ -36,35 +36,6 @@
   })
 </script>
 
-<!-- 댓글 작성 스크립트 ↓ -->
-<script>
-  // 댓글작성 관련
-  let ReplyWrite__submitFormDone = false;
-  function ReplyWrite__submitForm(form) {
-    if (ReplyWrite__submitFormDone) {
-      return;
-    }
-
-    // 좌우공백 제거
-    form.body.value = form.body.value.trim();
-
-    if (form.body.value.length == 0) {
-      alert('댓글을 입력해주세요.');
-      form.body.focus();
-      return;
-    }
-
-    if (form.body.value.length < 2) {
-      alert('댓글내용을 2자이상 입력해주세요.');
-      form.body.focus();
-      return;
-    }
-
-    ReplyWrite__submitFormDone = true;
-    form.submit();
-  }
-</script>
-
 <section class="mt-5">
 	<div class="container mx-auto px-3">
 		<div class="table-box-type-1">
@@ -160,6 +131,35 @@
 	</div>
 </section>
 
+<!-- 댓글 작성 스크립트 ↓ -->
+<script>
+  // 댓글작성 관련
+  let ReplyWrite__submitFormDone = false;
+  function ReplyWrite__submitForm(form) {
+    if (ReplyWrite__submitFormDone) {
+      return;
+    }
+
+    // 좌우공백 제거
+    form.body.value = form.body.value.trim();
+
+    if (form.body.value.length == 0) {
+      alert('댓글을 입력해주세요.');
+      form.body.focus();
+      return;
+    }
+
+    if (form.body.value.length < 2) {
+      alert('댓글내용을 2자이상 입력해주세요.');
+      form.body.focus();
+      return;
+    }
+
+    ReplyWrite__submitFormDone = true;
+    form.submit();
+  }
+</script>
+
 <!-- 댓글 작성 폼 ↓ -->
 
 <section class="mt-5">
@@ -198,6 +198,12 @@
 		<c:if test="${rq.notLogined}">
 			<a class="link link-primary" href="/usr/member/login">로그인</a> 후 이용해주세요.
     </c:if>
+	</div>
+</section>
+
+<section class="mt-5">
+	<div class="container mx-auto px-3">
+		<h1>댓글 리스트(${repliesCount})</h1>
 	</div>
 </section>
 
