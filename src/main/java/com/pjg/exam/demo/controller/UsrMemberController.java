@@ -1,12 +1,8 @@
 package com.pjg.exam.demo.controller;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-
 import com.pjg.exam.demo.service.MemberService;
 import com.pjg.exam.demo.util.Ut;
 import com.pjg.exam.demo.vo.Member;
@@ -65,29 +61,19 @@ public class UsrMemberController {
 	@RequestMapping("/usr/member/doLogout")
 	@ResponseBody
 	public String doLogout() {
-		if (!rq.isLogined()) {
-			return rq.jsHistoryBack("이미 로그아웃 상태입니다.");
-		}
-
 		rq.logout();
 
 		return rq.jsReplace("로그아웃 되었습니다.", "/");
 	}
 
-	
 	@RequestMapping("/usr/member/login")
 	public String showLogin() {
 		return "usr/member/login";
 	}
 
-	
 	@RequestMapping("/usr/member/doLogin")
 	@ResponseBody
 	public String doLogin(String loginId, String loginPw) {
-		if (rq.isLogined()) {
-			return rq.jsHistoryBack("이미 로그인되었습니다.");
-		}
-
 		if (Ut.empty(loginId)) {
 			return rq.jsHistoryBack("loginId(을)를 입력해주세요.");
 		}
@@ -113,13 +99,25 @@ public class UsrMemberController {
 	
 	@RequestMapping("/usr/member/myPage")
 	public String showMyPage() {
-		
 		return "usr/member/myPage";
 	}
 	
 	@RequestMapping("/usr/member/checkPassword")
 	public String showCheckPassword() {
-		
 		return "usr/member/checkPassword";
+	}
+	
+	@RequestMapping("/usr/member/doCheckPassword")
+	@ResponseBody
+	public String doCheckPassword(String loginPw, String replaceUri) {
+		if (Ut.empty(loginPw)) {
+			return rq.jsHistoryBack("loginPw(을)를 입력해주세요.");
+		}
+
+		if (rq.getLoginedMember().getLoginPw().equals(loginPw) == false) {
+			return rq.jsHistoryBack("비밀번호가 일치하지 않습니다.");
+		}
+
+		return rq.jsReplace("", replaceUri);
 	}
 }

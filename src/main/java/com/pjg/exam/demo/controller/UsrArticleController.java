@@ -26,24 +26,22 @@ public class UsrArticleController {
 	private ArticleService articleService;
 	private BoardService boardService;
 	private ReactionPointService reactionPointService;
-	private Rq rq;
 	private ReplyService replyService;
+	private Rq rq;
 
-	public UsrArticleController(ArticleService articleService, BoardService boardService,ReactionPointService reactionPointService,
-								ReplyService replyService, Rq rq) {
-		
+	public UsrArticleController(ArticleService articleService, BoardService boardService,
+			ReactionPointService reactionPointService, ReplyService replyService, Rq rq) {
 		this.articleService = articleService;
 		this.boardService = boardService;
-		this.reactionPointService = reactionPointService;
 		this.replyService = replyService;
+		this.reactionPointService = reactionPointService;
 		this.rq = rq;
 	}
 
 	@RequestMapping("/usr/article/list")
 	public String showList(Model model, @RequestParam(defaultValue = "1") int boardId,
-										@RequestParam(defaultValue = "title,body") String searchKeywordTypeCode,
-										@RequestParam(defaultValue = "") String searchKeyword, @RequestParam(defaultValue = "1") int page) {
-		
+			@RequestParam(defaultValue = "title,body") String searchKeywordTypeCode,
+			@RequestParam(defaultValue = "") String searchKeyword, @RequestParam(defaultValue = "1") int page) {
 		Board board = boardService.getBoardById(boardId);
 
 		if (board == null) {
@@ -54,8 +52,8 @@ public class UsrArticleController {
 
 		int itemsCountInAPage = 10;
 		int pagesCount = (int) Math.ceil((double) articlesCount / itemsCountInAPage);
-		List<Article> articles = articleService.getForPrintArticles(rq.getLoginedMemberId(), boardId, searchKeywordTypeCode,
-																	searchKeyword, itemsCountInAPage, page);
+		List<Article> articles = articleService.getForPrintArticles(rq.getLoginedMemberId(), boardId,
+				searchKeywordTypeCode, searchKeyword, itemsCountInAPage, page);
 
 		model.addAttribute("boardId", boardId);
 		model.addAttribute("page", page);
@@ -78,7 +76,8 @@ public class UsrArticleController {
 
 		model.addAttribute("replies", replies);
 
-		ResultData actorCanMakeReactionPointRd = reactionPointService.actorCanMakeReactionPoint(rq.getLoginedMemberId(), "article", id);
+		ResultData actorCanMakeReactionPointRd = reactionPointService.actorCanMakeReactionPoint(rq.getLoginedMemberId(),
+				"article", id);
 
 		model.addAttribute("actorCanMakeReaction", actorCanMakeReactionPointRd.isSuccess());
 
@@ -91,6 +90,7 @@ public class UsrArticleController {
 				model.addAttribute("actorCanCancelBadReaction", true);
 			}
 		}
+
 		return "usr/article/detail";
 	}
 
@@ -103,10 +103,11 @@ public class UsrArticleController {
 			return increaseHitCountRd;
 		}
 
-		ResultData<Integer> rd = ResultData.newData(increaseHitCountRd, "hitCount", articleService.getArticleHitCount(id));
-		
+		ResultData<Integer> rd = ResultData.newData(increaseHitCountRd, "hitCount",
+				articleService.getArticleHitCount(id));
+
 		rd.setData2("id", id);
-		
+
 		return rd;
 	}
 
