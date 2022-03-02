@@ -213,7 +213,7 @@ GROUP BY RP.relTypeCode, RP.relId
 UPDATE article AS A
 INNER JOIN (
     SELECT RP.relId,
-    SUM(IF(RP.point > 0, RP.point, 0)) AS goodReactionPoint,
+    SUM(IF(RP.point > 0, RP.point, 0))      AS goodReactionPoint,
     SUM(IF(RP.point < 0, RP.point * -1, 0)) AS badReactionPoint
     FROM reactionPoint AS RP
     WHERE relTypeCode = 'article'

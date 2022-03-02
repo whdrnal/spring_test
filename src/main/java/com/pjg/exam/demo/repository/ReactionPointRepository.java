@@ -19,11 +19,11 @@ public interface ReactionPointRepository {
 	@Insert("""
 			INSERT INTO reactionPoint
 			SET regDate = NOW(),
-			updateDate = NOW(),
+			 updateDate = NOW(),
 			relTypeCode = #{relTypeCode},
-			relId = #{relId},
-			memberId = #{memberId},
-			`point` = 1
+			      relId = #{relId},
+			   memberId = #{memberId},
+			    `point` = 1
 			""")
 	void addGoodReactionPoint(int memberId, String relTypeCode, int relId);
 

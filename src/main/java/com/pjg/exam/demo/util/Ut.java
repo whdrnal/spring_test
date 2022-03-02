@@ -19,7 +19,6 @@ public class Ut {
 		if (obj instanceof String == false) {
 			return true;
 		}
-
 		String str = (String) obj;
 
 		return str.trim().length() == 0;

@@ -14,7 +14,7 @@ import com.pjg.exam.demo.vo.Rq;
 public class UsrMemberController {
 	private MemberService memberService;
 	private Rq rq;
-
+	
 	public UsrMemberController(MemberService memberService, Rq rq) {
 		this.memberService = memberService;
 		this.rq = rq;
@@ -24,6 +24,7 @@ public class UsrMemberController {
 	@ResponseBody
 	public ResultData<Member> doJoin(String loginId, String loginPw, String name, String nickname, String cellphoneNo,
 			String email) {
+		
 		if (Ut.empty(loginId)) {
 			return ResultData.from("F-1", "loginId(을)를 입력해주세요.");
 		}
@@ -74,6 +75,7 @@ public class UsrMemberController {
 	@RequestMapping("/usr/member/doLogin")
 	@ResponseBody
 	public String doLogin(String loginId, String loginPw) {
+		
 		if (Ut.empty(loginId)) {
 			return rq.jsHistoryBack("loginId(을)를 입력해주세요.");
 		}
@@ -99,11 +101,13 @@ public class UsrMemberController {
 	
 	@RequestMapping("/usr/member/myPage")
 	public String showMyPage() {
+		
 		return "usr/member/myPage";
 	}
 	
 	@RequestMapping("/usr/member/checkPassword")
 	public String showCheckPassword() {
+		
 		return "usr/member/checkPassword";
 	}
 	
@@ -119,5 +123,11 @@ public class UsrMemberController {
 		}
 
 		return rq.jsReplace("", replaceUri);
+	}
+	
+	@RequestMapping("/usr/member/modify")	
+	public String showModify() {
+		
+		return "usr/member/modify";
 	}
 }

@@ -8,13 +8,15 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import com.pjg.exam.demo.vo.Article;
 
 @Mapper
 public interface ArticleRepository {
+	
 	public void writeArticle(@Param("memberId") int memberId, @Param("boardId") int boardId,
-			@Param("title") String title, @Param("body") String body);
+							 @Param("title") String title, @Param("body") String body);
 
 	@Select("""
 			<script>
@@ -113,8 +115,8 @@ public interface ArticleRepository {
 	@Select("""
 			<script>
 			SELECT hitCount
-			FROM article
-			WHERE id = #{id}
+			  FROM article
+			 WHERE id = #{id}
 			</script>
 			""")
 	public int getArticleHitCount(int id);
