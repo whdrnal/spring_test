@@ -11,12 +11,10 @@ import com.pjg.exam.demo.vo.ResultData;
 public class MemberService {
 	private MemberRepository memberRepository;
 	private AttrService attrService;
-
 	public MemberService(AttrService attrService, MemberRepository memberRepository) {
 		this.attrService = attrService;
 		this.memberRepository = memberRepository;
 	}
-
 	public ResultData<Integer> join(String loginId, String loginPw, String name, String nickname, String cellphoneNo,
 			String email) {
 		// 로그인아이디 중복체크
@@ -44,15 +42,23 @@ public class MemberService {
 	}
 	public ResultData modify(int id, String loginPw, String name, String nickname, String email, String cellphoneNo) {
 		memberRepository.modify(id, loginPw, name, nickname, email, cellphoneNo);
-
 		return ResultData.from("S-1", "회원정보가 수정되었습니다.");
 	}
-
 	public String genMemberModifyAuthKey(int actorId) {
 		String memberModifyAuthKey = Ut.getTempPassword(10);
-
+		
 		attrService.setValue("member", actorId, "extra", "memberModifyAuthKey", memberModifyAuthKey, Ut.getDateStrLater(60 * 5));
 
 		return memberModifyAuthKey;
+	}
+
+	public ResultData checkMemberModifyAuthKey(int actorId, String memberModifyAuthKey) {
+		String saved = attrService.getValue("member", actorId, "extra", "memberModifyAuthKey");
+
+		if ( !saved.equals(memberModifyAuthKey) ) {
+			return ResultData.from("F-1", "일치하지 않거나 만료되었습니다.");
+		}
+
+		return ResultData.from("S-1", "정상적인 코드입니다.");
 	}
 }
