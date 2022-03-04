@@ -29,13 +29,15 @@ public class MyWebMvcConfigurer implements WebMvcConfigurer {
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
 		InterceptorRegistration ir;
-
+		
+		// 통합, 배제 url 
 		ir = registry.addInterceptor(beforeActionInterceptor);
 		ir.addPathPatterns("/**");
 		ir.excludePathPatterns("/favicon.ico");
 		ir.excludePathPatterns("/resource/**");
 		ir.excludePathPatterns("/error");
 		
+		// 로그인 했을경우에만 들어갈 url
 		ir = registry.addInterceptor(needLoginInterceptor);
 		ir.addPathPatterns("/usr/member/myPage");
 		ir.addPathPatterns("/usr/member/checkPassword");
@@ -58,7 +60,8 @@ public class MyWebMvcConfigurer implements WebMvcConfigurer {
 		ir.addPathPatterns("/usr/reactionPoint/doBadReaction");
 		ir.addPathPatterns("/usr/reactionPoint/doCancelGoodReaction");
 		ir.addPathPatterns("/usr/reactionPoint/doCancelBadReaction");
-
+		
+		// 로그인아웃 상태에서만 할수있는url
 		ir = registry.addInterceptor(needLogoutInterceptor);
 		ir.addPathPatterns("/usr/member/join");
 		ir.addPathPatterns("/usr/member/doJoin");

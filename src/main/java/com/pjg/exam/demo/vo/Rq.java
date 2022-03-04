@@ -36,11 +36,12 @@ public class Rq {
 
 		this.session = req.getSession();
 
-		boolean isLogined = false;
-		int loginedMemberId = 0;
-		Member loginedMember = null;
+		boolean isLogined = false; // 로그인 여부만 알수있다.
+		int loginedMemberId = 0; // loginMemberId 많이 썼던 이유: 로그인 여부 와 어떤 회원이 들어왔는지 알기위해서.
 
+		Member loginedMember = null;
 		if (session.getAttribute("loginedMemberId") != null) {
+			// 로그인한 고객이 존재한다면 아래 코드를 실행시켜라.
 			isLogined = true;
 			loginedMemberId = (int) session.getAttribute("loginedMemberId");
 			loginedMember = memberService.getMemberById(loginedMemberId);
@@ -49,12 +50,13 @@ public class Rq {
 		this.isLogined = isLogined;
 		this.loginedMemberId = loginedMemberId;
 		this.loginedMember = loginedMember;
+		
 		this.req.setAttribute("rq", this);
 	}
 
 	public void printReplaceJs(String msg, String url) {
 		resp.setContentType("text/html; charset=UTF-8");
-		print(Ut.jsReplace(msg, url) );
+		print(Ut.jsReplace(msg, url));
 	}
 
 	public void printHistoryBackJs(String msg) {
@@ -69,7 +71,7 @@ public class Rq {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public boolean isNotLogined() {
 		return !isLogined;
 	}
@@ -99,16 +101,16 @@ public class Rq {
 	public String jsReplace(String msg, String uri) {
 		return Ut.jsReplace(msg, uri);
 	}
-	
+
 	public String getCurrentUri() {
 		String currentUri = req.getRequestURI();
-        String queryString = req.getQueryString();
+		String queryString = req.getQueryString();
 
-        if (queryString != null && queryString.length() > 0) {
-            currentUri += "?" + queryString;
-        }
+		if (queryString != null && queryString.length() > 0) {
+			currentUri += "?" + queryString;
+		}
 
-        return currentUri;
+		return currentUri;
 	}
 
 	public String getEncodedCurrentUri() {

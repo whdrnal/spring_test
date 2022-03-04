@@ -27,6 +27,7 @@ public class UsrArticleController {
 	private BoardService boardService;
 	private ReactionPointService reactionPointService;
 	private ReplyService replyService;
+	//가짜 이지만, 가짜이건 아니건 사용할수 있으면 사용자 입장에선 알필요가 없다.
 	private Rq rq;
 
 	public UsrArticleController(ArticleService articleService, BoardService boardService,

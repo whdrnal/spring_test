@@ -16,6 +16,7 @@ public class UsrReactionPointController {
 		this.reactionPointService = reactionPointService;
 		this.rq = rq;
 	}
+	
 	@RequestMapping("/usr/reactionPoint/doGoodReaction")
 	@ResponseBody
 	String doGoodReaction(String relTypeCode, int relId, String replaceUri) {
@@ -25,11 +26,13 @@ public class UsrReactionPointController {
 		if (actorCanMakeReactionPointRd.isFail()) {
 			return rq.jsHistoryBack(actorCanMakeReactionPointRd.getMsg());
 		}
+		
 
 		ResultData addGoodReactionPointRd = reactionPointService.addGoodReactionPoint(rq.getLoginedMemberId(), relTypeCode, relId);
 
 		return rq.jsReplace(addGoodReactionPointRd.getMsg(), replaceUri);
 	}
+	
 	
 	@RequestMapping("/usr/reactionPoint/doBadReaction")
 	@ResponseBody
