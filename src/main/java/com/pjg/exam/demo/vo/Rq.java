@@ -35,7 +35,7 @@ public class Rq {
 	public Rq(HttpServletRequest req, HttpServletResponse resp, MemberService memberService) {
 		this.req = req;
 		this.resp = resp;
-		
+
 		paramMap = Ut.getParamMap(req);
 
 		this.session = req.getSession();
@@ -54,7 +54,7 @@ public class Rq {
 		this.isLogined = isLogined;
 		this.loginedMemberId = loginedMemberId;
 		this.loginedMember = loginedMember;
-		
+
 		this.req.setAttribute("rq", this);
 	}
 
@@ -127,14 +127,26 @@ public class Rq {
 	public void initOnBeforeActionInterceptor() {
 
 	}
-	
+
 	public String getLoginUri() {
 		return "../member/login?afterLoginUri=" + getAfterLoginUri();
+	}
+
+	public String getLogoutUri() {
+		String requestUri = req.getRequestURI();
+
+		// 메인으로 가고싶다면 활성화 / 현재 있던 페이지로 이동
+		/*
+		 * switch (requestUri) { case "/usr/article/write": return ""; }
+		 */
+
+		return "../member/doLogout?afterLogoutUri=" + getAfterLogoutUri();
 	}
 
 	public String getAfterLoginUri() {
 		String requestUri = req.getRequestURI();
 
+		// 로그인 후 다시 돌아가면 안되는 페이지 URL 들
 		switch (requestUri) {
 		case "/usr/member/login":
 		case "/usr/member/join":
@@ -143,6 +155,10 @@ public class Rq {
 			return Ut.getUriEncoded(Ut.getStrAttr(paramMap, "afterLoginUri", ""));
 		}
 
+		return getEncodedCurrentUri();
+	}
+
+	public String getAfterLogoutUri() {
 		return getEncodedCurrentUri();
 	}
 }
