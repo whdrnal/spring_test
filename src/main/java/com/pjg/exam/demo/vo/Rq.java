@@ -123,4 +123,12 @@ public class Rq {
 	public void initOnBeforeActionInterceptor() {
 
 	}
+	
+	public String getLoginUri() {
+		return "../member/login?afterLoginUri=" + getAfterLoginUri();
+	}
+
+	public String getAfterLoginUri() {
+		return getEncodedCurrentUri();
+	}
 }
