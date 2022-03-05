@@ -97,7 +97,7 @@ public class Ut {
 
 		return sb.toString();
 	}
-	
+
 	public static Map<String, String> getParamMap(HttpServletRequest request) {
 		Map<String, String> param = new HashMap<>();
 
@@ -111,5 +111,13 @@ public class Ut {
 		}
 
 		return param;
+	}
+
+	public static String getStrAttr(Map map, String attrName, String defaultValue) {
+		if (map.containsKey(attrName)) {
+			return (String) map.get(attrName);
+		}
+
+		return defaultValue;
 	}
 }
