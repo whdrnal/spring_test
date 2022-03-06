@@ -29,6 +29,7 @@
   <div class="container mx-auto px-3">
     <form class="table-box-type-1" method="POST" action="../reply/doModify"
       onsubmit="ReplyModify__submit(this); return false;">
+      <input type="hidden" name="replaceUri" value="${param.replaceUri}" />
       <input type="hidden" name="id" value="${reply.id}" />
       <table>
         <colgroup>
