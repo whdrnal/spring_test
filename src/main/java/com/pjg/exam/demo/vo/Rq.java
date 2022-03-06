@@ -161,4 +161,11 @@ public class Rq {
 	public String getAfterLogoutUri() {
 		return getEncodedCurrentUri();
 	}
+	
+	
+	// 파라미터 값을 가지고 가야 뒤로가기 가능 , NOT 임프티 사용 ( 무조껀 값이 있을때만 이동가능 )
+	// 기본 임프티 값이 없어도 이동가능 
+	public String getArticleDetailUriFromArticleList(Article article) {
+		return "../article/detail?id=" + article.getId() + "&listUri=" + getEncodedCurrentUri();
+	}
 }

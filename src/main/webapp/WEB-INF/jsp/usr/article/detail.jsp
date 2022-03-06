@@ -5,29 +5,29 @@
 <%@ include file="../../common/toastUiEditorLib.jspf"%>
 
 <script>
-	const params = {};
-	params.id = parseInt('${param.id}');
+  const params = {};
+  params.id = parseInt('${param.id}');
 </script>
 <script>
-	function ArticleDetail__increaseHitCount() {
-		const localStorageKey = 'article__' + params.id + '__viewDone';
-		if (localStorage.getItem(localStorageKey)) {
-			return;
-		}
-		localStorage.setItem(localStorageKey, true);
-		$.get('../article/doIncreaseHitCountRd', {
-			id : params.id,
-			ajaxMode : 'Y'
-		}, function(data) {
-			$('.article-detail__hit-count').empty().html(data.data1);
-		}, 'json');
-	}
-	$(function() {
-		// 실전코드
-		// ArticleDetail__increaseHitCount();
-		// 임시코드
-		setTimeout(ArticleDetail__increaseHitCount, 500);
-	})
+  function ArticleDetail__increaseHitCount() {
+    const localStorageKey = 'article__' + params.id + '__viewDone';
+    if (localStorage.getItem(localStorageKey)) {
+      return;
+    }
+    localStorage.setItem(localStorageKey, true);
+    $.get('../article/doIncreaseHitCountRd', {
+      id : params.id,
+      ajaxMode : 'Y'
+    }, function(data) {
+      $('.article-detail__hit-count').empty().html(data.data1);
+    }, 'json');
+  }
+  $(function() {
+    // 실전코드
+    // ArticleDetail__increaseHitCount();
+    // 임시코드
+    setTimeout(ArticleDetail__increaseHitCount, 500);
+  })
 </script>
 <section class="mt-5">
 	<div class="container mx-auto px-3">
@@ -116,7 +116,13 @@
 		</div>
 
 		<div class="btns">
-			<button class="btn btn-link" type="button" onclick="history.back();">뒤로가기</button>
+			<c:if test="${empty param.listUri}">
+				<button class="btn btn-link" type="button" onclick="history.back();">뒤로가기</button>
+			</c:if>
+			<c:if test="${not empty param.listUri}">
+				<a class="btn btn-link" href="${param.listUri}">뒤로가기</a>
+			</c:if>
+
 			<c:if test="${article.extra__actorCanModify}">
 				<a class="btn btn-link" href="../article/modify?id=${article.id}">게시물 수정</a>
 			</c:if>
@@ -128,27 +134,27 @@
 	</div>
 </section>
 <script>
-	// 댓글작성 관련
-	let ReplyWrite__submitFormDone = false;
-	function ReplyWrite__submitForm(form) {
-		if (ReplyWrite__submitFormDone) {
-			return;
-		}
-		// 좌우공백 제거
-		form.body.value = form.body.value.trim();
-		if (form.body.value.length == 0) {
-			alert('댓글을 입력해주세요.');
-			form.body.focus();
-			return;
-		}
-		if (form.body.value.length < 2) {
-			alert('댓글내용을 2자이상 입력해주세요.');
-			form.body.focus();
-			return;
-		}
-		ReplyWrite__submitFormDone = true;
-		form.submit();
-	}
+  // 댓글작성 관련
+  let ReplyWrite__submitFormDone = false;
+  function ReplyWrite__submitForm(form) {
+    if (ReplyWrite__submitFormDone) {
+      return;
+    }
+    // 좌우공백 제거
+    form.body.value = form.body.value.trim();
+    if (form.body.value.length == 0) {
+      alert('댓글을 입력해주세요.');
+      form.body.focus();
+      return;
+    }
+    if (form.body.value.length < 2) {
+      alert('댓글내용을 2자이상 입력해주세요.');
+      form.body.focus();
+      return;
+    }
+    ReplyWrite__submitFormDone = true;
+    form.submit();
+  }
 </script>
 <section class="mt-5">
 	<div class="container mx-auto px-3">
