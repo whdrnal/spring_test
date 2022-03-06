@@ -64,6 +64,7 @@ public class MyWebMvcConfigurer implements WebMvcConfigurer {
 		// 로그인아웃 상태에서만 할수있는url
 		ir = registry.addInterceptor(needLogoutInterceptor);
 		ir.addPathPatterns("/usr/member/join");
+		ir.addPathPatterns("/usr/member/getLoginIdDup");
 		ir.addPathPatterns("/usr/member/doJoin");
 		ir.addPathPatterns("/usr/member/login");
 		ir.addPathPatterns("/usr/member/doLogin");
