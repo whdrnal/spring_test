@@ -142,4 +142,23 @@ public class UsrReplyController {
 		}
 		return rq.jsReplace(deleteReplyRd.getMsg(), replaceUri);
 	}
+	
+	@RequestMapping("/usr/reply/doDeleteAjax")
+	@ResponseBody
+	public ResultData doDeleteAjax(int id, String replaceUri) {
+
+		Reply reply = replyService.getForPrintReply(rq.getLoginedMember(), id);
+
+		if (reply == null) {
+			return ResultData.from("F-1", "존재하지 않은 댓글입니다.");
+		}
+
+		if (reply.isExtra__actorCanDelete() == false) {
+			return ResultData.from("F-2", "권한이 없습니다.");
+		}
+
+		ResultData deleteReplyRd = replyService.deleteReply(id);
+		
+		return deleteReplyRd;
+	}
 }

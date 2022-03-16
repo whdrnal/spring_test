@@ -81,7 +81,7 @@ public class ReplyService {
 	public ResultData deleteReply(int id) {
 		replyRepository.deleteReply(id);
 
-		return ResultData.from("S-1", Ut.f("%d번 댓글을 삭제하였습니다.", id));
+		return ResultData.from("S-1", Ut.f("", id));
 	}
 
 	public Reply getReply(int id) {
