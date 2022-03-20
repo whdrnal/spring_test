@@ -27,36 +27,36 @@
     <div class="mt-3">
       <table class="table table-fixed w-full">
         <colgroup>
-          <col width="50" />
+          <col width="100" />
+          <col width="120" />
+          <col width="120" />
           <col width="100" />
           <col width="100" />
-          <col width="50" />
-          <col width="50" />
           <col width="150" />
           <col />
         </colgroup>
         <thead>
           <tr>
-            <th>번호</th>
-            <th>작성날짜</th>
-            <th>수정날짜</th>
-            <th>조회</th>
-            <th>추천</th>
-            <th>작성자</th>
-            <th>제목</th>
+            <th class="text-center">번호</th>
+            <th class="text-center">작성날짜</th>
+            <th class="text-center">수정날짜</th>
+            <th class="text-center">조회</th>
+            <th class="text-center">추천</th>
+            <th class="text-center">작성자</th>
+            <th class="text-center">제목</th>
           </tr>
         </thead>
         <tbody>
           <c:forEach var="article" items="${articles}">
             <tr>
-              <th>${article.id}</th>
-              <td>${article.forPrintType1RegDate}</td>
-              <td>${article.forPrintType1UpdateDate}</td>
-              <td>${article.hitCount}</td>
-              <td>${article.goodReactionPoint}</td>
-              <td>${article.extra__writerName}</td>
+              <th class="text-center">${article.id}</th>
+              <td class="text-center">${article.forPrintType1RegDate}</td>
+              <td class="text-center">${article.forPrintType1UpdateDate}</td>
+              <td class="text-center">${article.hitCount}</td>
+              <td class="text-center">${article.goodReactionPoint}</td>
+              <td class="text-center">${article.extra__writerName}</td>
               <td>
-                <a class="btn-text-link block w-full truncate" href="${rq.getArticleDetailUriFromArticleList(article)}">
+                <a class="btn-text-link block w-full truncate text-center" href="${rq.getArticleDetailUriFromArticleList(article)}">
                   ${article.title}
                 </a>
               </td>
