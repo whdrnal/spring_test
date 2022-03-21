@@ -80,12 +80,19 @@
   }
   
   function checkLoginIdDup(el) {
-    $('.loginId-message').html('<div class="mt-2">체크중..</div>')
-    const form = $(el).closest('form').get(0);
-    if (form.loginId.value.length == 0) {
-      validLoginId = '';
-      return;
-    }
+  	const form = $(el).closest('form').get(0);
+  	
+      if (form.loginId.value.length == 0) {
+        validLoginId = '';
+        return;
+      }
+      
+      if ( validLoginId == form.loginId.value ) {
+        return;
+      }
+      
+      $('.loginId-message').html('<div class="mt-2">체크중..</div>');
+    
     $.get('../member/getLoginIdDup', {
       isAjax : 'Y',
       loginId : form.loginId.value
