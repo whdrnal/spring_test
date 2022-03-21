@@ -97,22 +97,25 @@
       
       $('.loginId-message').html('<div class="mt-2">체크중..</div>');
     
-    $.get('../member/getLoginIdDup', {
-      isAjax : 'Y',
-      loginId : form.loginId.value
-    }, function(data) {
-      $('.loginId-message').html('<div class="mt-2">' + data.msg + '</div>');
-      if (data.success) {
-        validLoginId = data.data1;
-      } else {
-        validLoginId = '';
-      }
-    }, 'json');
-  }
-  
-  const checkLoginIdDupDebounced = _.debounce(checkLoginIdDup, 300);
-  
-</script>
+      $.get('../member/getLoginIdDup', {
+        isAjax : 'Y',
+        loginId : form.loginId.value
+      }, function(data) {
+        $('.loginId-message').html('<div class="mt-2">' + data.msg + '</div>');
+        if (data.success) {
+          validLoginId = data.data1;
+        } else {
+          validLoginId = '';
+        }
+        
+        if ( data.resultCode == 'F-B' ) {
+      	alert(data.msg);
+        }
+      }, 'json');
+    }
+    
+    const checkLoginIdDupDebounced = _.debounce(checkLoginIdDup, 300);
+  </script>
 
 <section class="mt-5">
 	<div class="container mx-auto px-3">
@@ -127,7 +130,7 @@
 						<th>로그인아이디</th>
 						<td>
 							<input name="loginId" class="w-96 input input-bordered" type="text" placeholder="로그인아이디"
-									onkeyup="checkLoginIdDupDebounced(this);" autocomplete="off" />
+								onkeyup="checkLoginIdDupDebounced(this);" autocomplete="off" />
 							<div class="loginId-message"></div>
 						</td>
 					</tr>

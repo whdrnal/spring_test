@@ -20,6 +20,8 @@ import lombok.Getter;
 @Scope(value = "request", proxyMode = ScopedProxyMode.TARGET_CLASS)
 public class Rq {
 	@Getter
+	private boolean isAjax;
+	@Getter
 	private boolean isLogined;
 	@Getter
 	private int loginedMemberId;
@@ -45,7 +47,30 @@ public class Rq {
 		this.isLogined = isLogined;
 		this.loginedMemberId = loginedMemberId;
 		this.loginedMember = loginedMember;
+
+		String requestUri = req.getRequestURI();
+
+		// 해당 요청이 ajax 요청인지 아닌지 체크
+		boolean isAjax = requestUri.endsWith("Ajax");
+
+		if (isAjax == false) {
+			if (paramMap.containsKey("ajax") && paramMap.get("ajax").equals("Y")) {
+				isAjax = true;
+			}
+			else if (paramMap.containsKey("isAjax") && paramMap.get("isAjax").equals("Y")) {
+				isAjax = true;
+			}
+		}
+
+		if (isAjax == false) {
+			if (requestUri.contains("/get")) {
+				isAjax = true;
+			}
+		}
+
+		this.isAjax = isAjax;
 	}
+
 	public void printReplaceJs(String msg, String url) {
 		resp.setContentType("text/html; charset=UTF-8");
 		print(Ut.jsReplace(msg, url));
@@ -78,7 +103,6 @@ public class Rq {
 		req.setAttribute("historyBack", true);
 		return "common/js";
 	}
-
 	public String historyBackJsOnView(String resultCode, String msg) {
 		req.setAttribute("msg", String.format("[%s] %s", resultCode, msg));
 		req.setAttribute("historyBack", true);
@@ -89,7 +113,6 @@ public class Rq {
 		msg = String.format("[%s] %s", resultCode, msg);
 		return Ut.jsHistoryBack(msg);
 	}
-
 	public String jsHistoryBack(String msg) {
 		return Ut.jsHistoryBack(msg);
 	}
@@ -114,18 +137,14 @@ public class Rq {
 	public String getJoinUri() {
 		return "../member/join?afterLoginUri=" + getAfterLoginUri();
 	}
-
 	public String getLogoutUri() {
 		String requestUri = req.getRequestURI();
-
 		// 필요하다면 활성화
 		/*
 		 * switch (requestUri) { case "/usr/article/write": return ""; }
 		 */
-
 		return "../member/doLogout?afterLogoutUri=" + getAfterLogoutUri();
 	}
-
 	public String getAfterLoginUri() {
 		String requestUri = req.getRequestURI();
 		// 로그인 후 다시 돌아가면 안되는 페이지 URL 들을 적으시면 됩니다.
@@ -136,14 +155,11 @@ public class Rq {
 		case "/usr/member/findLoginPw":
 			return Ut.getUriEncoded(Ut.getStrAttr(paramMap, "afterLoginUri", ""));
 		}
-
 		return getEncodedCurrentUri();
 	}
-
 	public String getAfterLogoutUri() {
 		return getEncodedCurrentUri();
 	}
-
 	public String getArticleDetailUriFromArticleList(Article article) {
 		return "../article/detail?id=" + article.getId() + "&listUri=" + getEncodedCurrentUri();
 	}
