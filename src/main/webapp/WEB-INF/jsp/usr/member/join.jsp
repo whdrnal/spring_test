@@ -23,14 +23,11 @@
       
       return;
     }
-
     if (form.loginId.value != validLoginId) {
       alert('해당 로그인아이디는 올바르지 않습니다. 다른 아이디를 입력해주세요.');
       form.loginId.focus();
-
       return;
     }
-
     form.loginPw.value = form.loginPw.value.trim();
     if (form.loginPw.value.length == 0) {
       alert('로그인비밀번호를 입력해주세요.');
@@ -86,6 +83,8 @@
   function checkLoginIdDup(el) {
   	const form = $(el).closest('form').get(0);
   	
+  	$('.loginId-message').html('<div class="mt-2 text-red-500">입력된 로그인 아이디가 없습니다.</div>');
+  	
       if (form.loginId.value.length == 0) {
         validLoginId = '';
         return;
@@ -94,13 +93,13 @@
       if ( validLoginId == form.loginId.value ) {
         return;
       }
+
       
-      $('.loginId-message').html('<div class="mt-2">체크중..</div>');
-    
       $.get('../member/getLoginIdDup', {
         isAjax : 'Y',
         loginId : form.loginId.value
-      }, function(data) {
+      }, 
+      function(data) {
         $('.loginId-message').html('<div class="mt-2">' + data.msg + '</div>');
         if (data.success) {
           validLoginId = data.data1;
@@ -109,12 +108,12 @@
         }
         
         if ( data.resultCode == 'F-B' ) {
-      	alert(data.msg);
+      		alert(data.msg);
         }
       }, 'json');
     }
     
-    const checkLoginIdDupDebounced = _.debounce(checkLoginIdDup, 300);
+    const checkLoginIdDupDebounced = _.debounce(checkLoginIdDup, 500);
   </script>
 
 <section class="mt-5">
