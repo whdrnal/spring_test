@@ -50,6 +50,10 @@ public class UsrArticleController {
 		}
 
 		int articlesCount = articleService.getArticlesCount(boardId, searchKeywordTypeCode, searchKeyword);
+		
+		if (articlesCount == 0) {
+		  return rq.historyBackJsOnView(Ut.f("검색 결과가 없습니다."));
+		}
 
 		int itemsCountInAPage = 10;
 		int pagesCount = (int) Math.ceil((double) articlesCount / itemsCountInAPage);
