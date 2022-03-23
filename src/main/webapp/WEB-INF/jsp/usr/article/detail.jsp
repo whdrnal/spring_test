@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<c:set var="pageTitle" value="게시물 내용" />
+<c:set var="pageTitle" value="게시물" />
 <%@ include file="../common/head.jspf"%>
 <%@ include file="../../common/toastUiEditorLib.jspf"%>
 
@@ -8,6 +8,7 @@
 	const params = {};
 	params.id = parseInt('${param.id}');
 </script>
+
 <script>
 	function ArticleDetail__increaseHitCount() {
 		const localStorageKey = 'article__' + params.id + '__viewDone';
@@ -22,6 +23,7 @@
 			$('.article-detail__hit-count').empty().html(data.data1);
 		}, 'json');
 	}
+	
 	$(function() {
 		// 실전코드
 		// ArticleDetail__increaseHitCount();
@@ -121,7 +123,7 @@
         <button class="btn btn-link" type="button" onclick="history.back();">뒤로가기</button>
       </c:if>
       <c:if test="${not empty param.listUri}">
-        <a class="btn btn-outline btn-secondary mt-4" href="${param.listUri}">뒤로가기</a>
+        <a class="btn btn-outline mt-4" href="${param.listUri}">뒤로가기</a>
       </c:if>
 
       <c:if test="${article.extra__actorCanModify}">
@@ -220,7 +222,7 @@ function Reply__delete(id) {
 </section>
 <section class="mt-5">
   <div class="container mx-auto px-3">
-    <h1>댓글 리스트(${replies.size()})</h1>
+    <h1>댓글 목록(${replies.size()})</h1>
     <table class="table table-fixed w-full">
       <colgroup>
         <col width="50" />

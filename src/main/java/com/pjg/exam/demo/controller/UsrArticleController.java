@@ -27,11 +27,10 @@ public class UsrArticleController {
 	private BoardService boardService;
 	private ReactionPointService reactionPointService;
 	private ReplyService replyService;
-	//가짜 이지만, 가짜이건 아니건 사용할수 있으면 사용자 입장에선 알필요가 없다.
 	private Rq rq;
 
-	public UsrArticleController(ArticleService articleService, BoardService boardService,
-			ReactionPointService reactionPointService, ReplyService replyService, Rq rq) {
+	public UsrArticleController(ArticleService articleService, BoardService boardService, ReactionPointService reactionPointService
+	                           ,ReplyService replyService, Rq rq) {
 		this.articleService = articleService;
 		this.boardService = boardService;
 		this.replyService = replyService;
@@ -52,7 +51,7 @@ public class UsrArticleController {
 		int articlesCount = articleService.getArticlesCount(boardId, searchKeywordTypeCode, searchKeyword);
 		
 		if (articlesCount == 0) {
-		  return rq.historyBackJsOnView(Ut.f("검색 결과가 없습니다."));
+		  return rq.historyBackJsOnView(Ut.f(searchKeyword + " 에 대한 검색결과가 없습니다."));
 		}
 
 		int itemsCountInAPage = 10;

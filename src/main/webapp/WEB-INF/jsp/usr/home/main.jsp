@@ -7,11 +7,11 @@
 
 <style media="screen">
 #divClock {
-  margin-top: 210px;
+  margin-top: 300px;
   font-size: 30px;
-  color: #8F7CEE;
+  color: #8282FF;
   text-align: center;
-  box-shadow: 5px 5px 10px ;
+  box-shadow: 5px 5px 10px;
 }
 </style>
 
@@ -52,7 +52,7 @@
         <img class="img" src="https://ifh.cc/g/j13moR.png" />
       </center> --%>
       <div class="mt-10">
-      <span>𝑰 𝒏𝒆𝒗𝒆𝒓 𝒅𝒓𝒆𝒂𝒎𝒆𝒅 𝒂𝒃𝒐𝒖𝒕 𝒔𝒖𝒄𝒄𝒆𝒔𝒔, 𝑰 𝒘𝒐𝒓𝒌𝒆𝒅 𝒇𝒐𝒓 𝒊𝒕.</span>
+      <span>𝑰'𝒎 𝒅𝒓𝒆𝒂𝒎𝒆𝒅 𝒂𝒃𝒐𝒖𝒕 𝒔𝒖𝒄𝒄𝒆𝒔𝒔, 𝑰 𝒘𝒐𝒓𝒌𝒆𝒅 𝒇𝒐𝒓 𝒊𝒕.</span>
       </div>
     </div>
   </div>
