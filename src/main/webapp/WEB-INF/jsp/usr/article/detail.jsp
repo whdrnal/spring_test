@@ -121,7 +121,7 @@
         <button class="btn btn-link" type="button" onclick="history.back();">뒤로가기</button>
       </c:if>
       <c:if test="${not empty param.listUri}">
-        <a class="btn btn-link" href="${param.listUri}">뒤로가기</a>
+        <a class="btn btn-outline btn-secondary mt-4" href="${param.listUri}">뒤로가기</a>
       </c:if>
 
       <c:if test="${article.extra__actorCanModify}">

@@ -83,7 +83,7 @@
   function checkLoginIdDup(el) {
   	const form = $(el).closest('form').get(0);
   	
-  	$('.loginId-message').html('<div class="mt-2 text-red-500">입력된 로그인 아이디가 없습니다.</div>');
+  	$('.loginId-message').html('<div class="spinner-border text-primary" role="status"></div>');
   	
       if (form.loginId.value.length == 0) {
         validLoginId = '';
