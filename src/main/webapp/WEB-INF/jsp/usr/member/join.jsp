@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+  <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <c:set var="pageTitle" value="회원가입" />
 <%@ include file="../common/head.jspf"%>
@@ -84,8 +84,7 @@
 		const form = $(el).closest('form').get(0);
 
 		$('.loginId-message')
-				.html(
-						'<div class="spinner-border text-primary" role="status"></div>');
+				.html('<div class="spinner-border text-primary mt-3" role="status">아이디를 입력해주세요.</div>');
 
 		if (form.loginId.value.length == 0) {
 			validLoginId = '';

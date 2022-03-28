@@ -17,16 +17,25 @@ SET regDate = NOW(),
 updateDate = NOW(),
 title = '제목 1',
 `body` = '내용 1';
+
 INSERT INTO article
 SET regDate = NOW(),
 updateDate = NOW(),
 title = '제목 2',
 `body` = '내용 2';
+
 INSERT INTO article
 SET regDate = NOW(),
 updateDate = NOW(),
 title = '제목 3',
 `body` = '내용 3';
+
+INSERT INTO article
+SET regDate = NOW(),
+updateDate = NOW(),
+title = '제목 4',
+`body` = '내용 4';
+
 # 회원 테이블 생성
 CREATE TABLE `member` (
     id INT(10) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
@@ -53,6 +62,7 @@ authLevel = 7,
 nickname = '관리자',
 cellphoneNo = '01011111111',
 email = 'jangka512@gmail.com';
+
 # 회원, 테스트 데이터 생성(일반 회원)
 INSERT INTO `member`
 SET regDate = NOW(),
@@ -63,6 +73,7 @@ loginPw = 'user1',
 nickname = '사용자1',
 cellphoneNo = '01011111111',
 email = 'jangka512@gmail.com';
+
 INSERT INTO `member`
 SET regDate = NOW(),
 updateDate = NOW(),
@@ -72,6 +83,7 @@ loginPw = 'user2',
 nickname = '사용자2',
 cellphoneNo = '01011111111',
 email = 'jangka512@gmail.com';
+
 # 게시물 테이블에 회원정보 추가
 ALTER TABLE article ADD COLUMN memberId INT(10) UNSIGNED NOT NULL AFTER `updateDate`;
 # 기존 게시물의 작성자를 2번호으로 지정
@@ -94,21 +106,36 @@ SET regDate = NOW(),
 updateDate = NOW(),
 `code` = 'notice',
 `name` = '공지사항';
+
 INSERT INTO board
 SET regDate = NOW(),
 updateDate = NOW(),
 `code` = 'free1',
 `name` = '자유';
+
+INSERT INTO board
+SET regDate = NOW(),
+updateDate = NOW(),
+`code` = 'free2',
+`name` = 'Q&A';
+
 # 게시판 테이블에 boardId 칼럼 추가
 ALTER TABLE article ADD COLUMN boardId INT(10) UNSIGNED NOT NULL AFTER memberId;
 # 1, 2번 게시물을 공지사항 게시물로 지정
 UPDATE article
 SET boardId = 1
 WHERE id IN (1, 2);
+
 # 3번 게시물을 자유게시판 게시물로 지정
 UPDATE article
 SET boardId = 2
 WHERE id IN (3);
+
+# 4번 게시물을 Q&A 게시물로 지정
+UPDATE article
+SET boardId = 3
+WHERE id IN (4);
+
 # 게시물 개수 늘리기
 /*
 insert into article
@@ -274,3 +301,5 @@ ALTER TABLE `attr` ADD INDEX (`relTypeCode`, `typeCode`, `type2Code`);
 
 # attr에 만료날짜 추가
 ALTER TABLE `attr` ADD COLUMN `expireDate` DATETIME NULL AFTER `value`;
+
+SELECT * FROM board;

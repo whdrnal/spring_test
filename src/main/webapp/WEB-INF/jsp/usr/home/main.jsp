@@ -11,7 +11,7 @@
         <img style="margin-top:10rem;" src="https://ifh.cc/g/j13moR.png" />
       </center>
       <div class="mt-10">
-        <span>𝑰'𝒎 𝒅𝒓𝒆𝒂𝒎𝒆𝒅 𝒂𝒃𝒐𝒖𝒕 𝒔𝒖𝒄𝒄𝒆𝒔𝒔, 𝑰 𝒘𝒐𝒓𝒌𝒆𝒅 𝒇𝒐𝒓 𝒊𝒕.</span>
+        <span>𝑷𝒆𝒐𝒑𝒍𝒆 𝒘𝒉𝒐 𝒂𝒔𝒌 𝒂 𝒍𝒐𝒕 𝒐𝒇 𝒒𝒖𝒆𝒔𝒕𝒊𝒐𝒏𝒔 𝒍𝒆𝒂𝒓𝒏 𝒂 𝒍𝒐𝒕 𝒂𝒏𝒅 𝒓𝒆𝒎𝒆𝒎𝒃𝒆𝒓 𝒂 𝒍𝒐𝒕.</span>
       </div>
     </div>
   </div>
