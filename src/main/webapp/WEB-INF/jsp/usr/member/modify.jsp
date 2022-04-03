@@ -2,6 +2,19 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <c:set var="pageTitle" value="회원정보수정" />
 <%@ include file="../common/head.jspf"%>
+<head>
+<style>
+table {
+	width: 95rem;
+	height: 500px;
+}
+
+table, th, td {
+	border: 2px solid #e2e8f0;
+}
+</style>
+</head>
+
 
 <script>
   let MemberModify__submitDone = false;
@@ -72,70 +85,67 @@
 </script>
 
 <section class="mt-5">
-  <div class="container mx-auto px-3">
-    <form class="table-box-type-1" method="POST" action="../member/doModify"
-      onsubmit="MemberModify__submit(this); return false;">
-      <input type="hidden" name="memberModifyAuthKey" value="${param.memberModifyAuthKey}"/>
-      <table>
-        <colgroup>
-          <col width="200" />
-        </colgroup>
-        <tbody>
-          <tr>
-            <th>로그인아이디</th>
-            <td>${rq.loginedMember.loginId}</td>
-          </tr>
-          <tr>
-            <th>새 로그인비밀번호</th>
-            <td>
-              <input class="input input-bordered" name="loginPw" placeholder="새 비밀번호를 입력해주세요." type="password" />
-            </td>
-          </tr>
-          <tr>
-            <th>새 로그인비밀번호 확인</th>
-            <td>
-              <input class="input input-bordered" name="loginPwConfirm" placeholder="새 비밀번호를 입력해주세요." type="password" />
-            </td>
-          </tr>
-          <tr>
-            <th>이름</th>
-            <td>
-              <input class="input input-bordered" name="name" placeholder="이름을 입력해주세요." type="text"
-                value="${rq.loginedMember.name}" />
-            </td>
-          </tr>
-          <tr>
-            <th>별명</th>
-            <td>
-              <input class="input input-bordered" name="nickname" placeholder="별명을 입력해주세요." type="text"
-                value="${rq.loginedMember.nickname}" />
-            </td>
-          </tr>
-          <tr>
-            <th>이메일</th>
-            <td>
-              <input class="input input-bordered" name="email" placeholder="이메일을 입력해주세요." type="email"
-                value="${rq.loginedMember.email}" />
-            </td>
-          </tr>
-          <tr>
-            <th>휴대전화번호</th>
-            <td>
-              <input class="input input-bordered" name="cellphoneNo" placeholder="휴대전화번호를 입력해주세요." type="tel"
-                value="${rq.loginedMember.cellphoneNo}" />
-            </td>
-          </tr>
-          <tr>
-            <th>회원정보수정</th>
-            <td>
-              <button type="submit" class="btn btn-primary">회원정보수정</button>
-              <button type="button" class="btn btn-outline btn-secondary" onclick="history.back();">뒤로가기</button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </form>
-  </div>
+	<div class="container mx-auto px-3">
+		<form method="POST" action="../member/doModify" onsubmit="MemberModify__submit(this); return false;">
+			<input type="hidden" name="memberModifyAuthKey" value="${param.memberModifyAuthKey}" />
+			<table>
+				<colgroup>
+					<col width="200" />
+				</colgroup>
+				<tbody>
+					<tr>
+						<th>로그인아이디</th>
+						<td class="px-4">${rq.loginedMember.loginId}</td>
+					</tr>
+					<tr>
+						<th>새 로그인비밀번호</th>
+						<td>
+							<input class="input input-bordered ml-2" name="loginPw" placeholder="새 비밀번호를 입력해주세요." type="password" />
+						</td>
+					</tr>
+					<tr>
+						<th>새 로그인비밀번호 확인</th>
+						<td>
+							<input class="input input-bordered ml-2" name="loginPwConfirm" placeholder="새 비밀번호를 입력해주세요." type="password" />
+						</td>
+					</tr>
+					<tr>
+						<th>이름</th>
+						<td>
+							<input class="input input-bordered ml-2" name="name" placeholder="이름을 입력해주세요." type="text"
+								value="${rq.loginedMember.name}" />
+						</td>
+					</tr>
+					<tr>
+						<th>별명</th>
+						<td>
+							<input class="input input-bordered ml-2" name="nickname" placeholder="별명을 입력해주세요." type="text"
+								value="${rq.loginedMember.nickname}" />
+						</td>
+					</tr>
+					<tr>
+						<th>이메일</th>
+						<td>
+							<input class="input input-bordered ml-2" name="email" placeholder="이메일을 입력해주세요." type="email"
+								value="${rq.loginedMember.email}" />
+						</td>
+					</tr>
+					<tr>
+						<th>휴대전화번호</th>
+						<td>
+							<input class="input input-bordered ml-2" name="cellphoneNo" placeholder="휴대전화번호를 입력해주세요." type="tel"
+								value="${rq.loginedMember.cellphoneNo}" />
+						</td>
+
+					</tr>
+				</tbody>
+			</table>
+			<div class="mt-2">
+				<button type="submit" class="btn btn-primary">회원정보수정</button>
+				<button type="button" class="btn btn-outline btn-secondary" onclick="history.back();">뒤로가기</button>
+			</div>
+		</form>
+	</div>
 </section>
 
-<%@ include file="../common/foot.jspf"%> 
+<%@ include file="../common/foot.jspf"%>

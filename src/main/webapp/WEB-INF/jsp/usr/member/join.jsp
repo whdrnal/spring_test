@@ -1,9 +1,22 @@
-  <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <c:set var="pageTitle" value="회원가입" />
 <%@ include file="../common/head.jspf"%>
-
 <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.min.js"></script>
+
+<head>
+<style>
+table {
+	width: 95rem;
+	height: 30rem;
+}
+
+table, th, td {
+	border: 2px solid #e2e8f0;
+}
+</style>
+</head>
 
 <script type="text/javascript">
 	let submitJoinFormDone = false;
@@ -117,71 +130,67 @@
 </script>
 
 <section class="mt-5">
-  <div class="container mx-auto px-3">
-    <form class="table-box-type-1" method="POST" action="../member/doJoin"
-      onsubmit="submitJoinForm(this); return false;">
-      <input type="hidden" name="afterLoginUri" value="${param.afterLoginUri}" />
-      <table>
-        <colgroup>
-          <col width="200" />
-        </colgroup>
-        <tbody>
-          <tr>
-            <th>로그인아이디</th>
-            <td>
-              <input name="loginId" class="w-96 input input-bordered" type="text" placeholder="로그인아이디"
-                onkeyup="checkLoginIdDupDebounced(this);" autocomplete="off" />
-              <div class="loginId-message"></div>
-            </td>
-          </tr>
-          <tr>
-            <th>로그인비밀번호</th>
-            <td>
-              <input name="loginPw" class="w-96 input input-bordered" type="password" placeholder="로그인비밀번호" />
-            </td>
-          </tr>
-          <tr>
-            <th>로그인비밀번호 확인</th>
-            <td>
-              <input name="loginPwConfirm" class="w-96 input input-bordered" type="password" placeholder="로그인비밀번호 확인" />
-            </td>
-          </tr>
-          <tr>
-            <th>이름</th>
-            <td>
-              <input name="name" class="w-96 input input-bordered" type="text" placeholder="이름" />
-            </td>
-          </tr>
-          <tr>
-            <th>닉네임</th>
-            <td>
-              <input name="nickname" class="w-96 input input-bordered" type="text" placeholder="닉네임" />
-            </td>
-          </tr>
-          <tr>
-            <th>이메일</th>
-            <td>
-              <input name="email" class="w-96 input input-bordered" type="email" placeholder="이메일" />
-            </td>
-          </tr>
-          <tr>
-            <th>휴대전화번호</th>
-            <td>
-              <input name="cellphoneNo" class="w-96 input input-bordered" type="text"
-                onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" placeholder="휴대전화번호" />
-            </td>
-          </tr>
-          <tr>
-            <th>회원가입</th>
-            <td>
-              <button type="submit" class="btn btn-primary">회원가입</button>
-              <button type="button" class="btn btn-outline btn-secondary" onclick="history.back();">뒤로가기</button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </form>
-  </div>
+	<div class="container mx-auto px-3">
+		<form method="POST" action="../member/doJoin" onsubmit="submitJoinForm(this); return false;">
+			<input type="hidden" name="afterLoginUri" value="${param.afterLoginUri}" />
+			<table>
+				<colgroup>
+					<col width="200" />
+				</colgroup>
+				<tbody>
+					<tr>
+						<th>로그인아이디</th>
+						<td>
+							<input name="loginId" class="w-96 input input-bordered ml-2" type="text" placeholder="로그인아이디"
+								onkeyup="checkLoginIdDupDebounced(this);" autocomplete="off" />
+							<div class="loginId-message"></div>
+						</td>
+					</tr>
+					<tr>
+						<th>로그인비밀번호</th>
+						<td>
+							<input name="loginPw" class="w-96 input input-bordered ml-2" type="password" placeholder="로그인비밀번호" />
+						</td>
+					</tr>
+					<tr>
+						<th>로그인비밀번호 확인</th>
+						<td>
+							<input name="loginPwConfirm" class="w-96 input input-bordered ml-2" type="password" placeholder="로그인비밀번호 확인" />
+						</td>
+					</tr>
+					<tr>
+						<th>이름</th>
+						<td>
+							<input name="name" class="w-96 input input-bordered ml-2" type="text" placeholder="이름" />
+						</td>
+					</tr>
+					<tr>
+						<th>닉네임</th>
+						<td>
+							<input name="nickname" class="w-96 input input-bordered ml-2" type="text" placeholder="닉네임" />
+						</td>
+					</tr>
+					<tr>
+						<th>이메일</th>
+						<td>
+							<input name="email" class="w-96 input input-bordered ml-2" type="email" placeholder="이메일" />
+						</td>
+					</tr>
+					<tr>
+						<th>휴대전화번호</th>
+						<td>
+							<input name="cellphoneNo" class="w-96 input input-bordered ml-2" type="text"
+								onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" placeholder="휴대전화번호" />
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			<div class="mt-2">
+				<button type="submit" class="btn btn-primary">회원가입</button>
+				<button type="button" class="btn btn-outline btn-secondary" onclick="history.back();">뒤로가기</button>
+			</div>
+		</form>
+	</div>
 </section>
 
 <%@ include file="../common/foot.jspf"%>

@@ -4,46 +4,54 @@
 
 <c:set var="pageTitle" value="마이페이지" />
 <%@ include file="../common/head.jspf"%>
+<head>
+<style>
+table {
+	width: 95rem;
+	height: 400px;
+}
+
+table, th, td {
+	border: 2px solid #e2e8f0;
+}
+</style>
+</head>
 
 <section class="mt-5">
 	<div class="container mx-auto px-3">
-		<div class="table-box-type-1">
-			<table>
-				<colgroup>
-					<col width="200" />
-				</colgroup>
-				<tbody>
-					<tr>
-						<th>로그인아이디</th>
-						<td>${rq.loginedMember.loginId}</td>
-					</tr>
-					<tr>
-						<th>이름</th>
-						<td>${rq.loginedMember.name}</td>
-					</tr>
-					<tr>
-						<th>별명</th>
-						<td>${rq.loginedMember.nickname}</td>
-					</tr>
-					<tr>
-						<th>이메일</th>
-						<td>${rq.loginedMember.email}</td>
-					</tr>
-					<tr>
-						<th>별명</th>
-						<td>${rq.loginedMember.cellphoneNo}</td>
-					</tr>
-					<tr>
-						<th>비고</th>
-						<td>
-							<a href="../member/checkPassword?replaceUri=${Ut.getUriEncoded('../member/modify')}" class="btn btn-primary">회원정보수정</a>
-							<button type="button" class="btn btn-outline btn-secondary" onclick="history.back();">뒤로가기</button>
-						</td>
-					</tr>
-				</tbody>
-			</table>
-			</form>
+		<table>
+			<colgroup>
+				<col width="200" />
+			</colgroup>
+			<tbody>
+				<tr>
+					<th>로그인아이디</th>
+					<td class="px-4">${rq.loginedMember.loginId}</td>
+				</tr>
+				<tr>
+					<th>이름</th>
+					<td class="px-4">${rq.loginedMember.name}</td>
+				</tr>
+				<tr>
+					<th>별명</th>
+					<td class="px-4">${rq.loginedMember.nickname}</td>
+				</tr>
+				<tr>
+					<th>이메일</th>
+					<td class="px-4">${rq.loginedMember.email}</td>
+				</tr>
+				<tr>
+					<th>별명</th>
+					<td class="px-4">${rq.loginedMember.cellphoneNo}</td>
+				</tr>
+			</tbody>
+		</table>
+		<div class="mt-2">
+			<a href="../member/checkPassword?replaceUri=${Ut.getUriEncoded('../member/modify')}" class="btn btn-primary">회원정보수정</a>
+			<button type="button" class="btn btn-outline btn-secondary" onclick="history.back();">뒤로가기</button>
 		</div>
+	</div>
+
 </section>
 
 <%@ include file="../common/foot.jspf"%>

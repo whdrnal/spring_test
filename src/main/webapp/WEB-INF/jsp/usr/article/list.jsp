@@ -16,7 +16,7 @@
           <option disabled="disabled">검색타입</option>
           <option value="title">제목</option>
           <option value="body">내용</option>
-          <option value="title,body">제목,내용</option>
+          <option value="title,body">제목 및 내용</option>
         </select>
         
         <input name="searchKeyword" type="text" class="ml-2 w-72 input input-bordered" placeholder="검색어" maxlength="20" value="${param.searchKeyword}" />

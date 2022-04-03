@@ -8,9 +8,9 @@
   <div class="container mx-auto">
     <div class="text-center" style="font-size: 2rem;">
       <center>
-        <img style="margin-top:10rem;" src="https://ifh.cc/g/j13moR.png" />
+        <img style="margin-top:12rem;" src="https://ifh.cc/g/j13moR.png" />
       </center>
-      <div class="mt-10">
+      <div class="mt-11 text-purple-400">
         <span>𝑷𝒆𝒐𝒑𝒍𝒆 𝒘𝒉𝒐 𝒂𝒔𝒌 𝒂 𝒍𝒐𝒕 𝒐𝒇 𝒒𝒖𝒆𝒔𝒕𝒊𝒐𝒏𝒔 𝒍𝒆𝒂𝒓𝒏 𝒂 𝒍𝒐𝒕 𝒂𝒏𝒅 𝒓𝒆𝒎𝒆𝒎𝒃𝒆𝒓 𝒂 𝒍𝒐𝒕.</span>
       </div>
     </div>

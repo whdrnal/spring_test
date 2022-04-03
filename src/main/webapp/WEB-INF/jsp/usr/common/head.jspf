@@ -23,7 +23,7 @@
   <header>
     <div class="h-20 flex container mx-auto">
       <a href="/" class="flex items-center px-3">
-        <span class="text-purple-400">𝑶𝑵𝑬 𝑸𝒖𝒆𝒔𝒕𝒊𝒐𝒏</span>
+        <span class="text-xl">𝑶𝒏𝒆 𝑸𝒖𝒆𝒔𝒕𝒐𝒏</span>
       </a>
 
       <div class="flex-grow"></div>
@@ -50,7 +50,7 @@
         </li>
         <li>
           <a class="h-full flex px-3 items-center hover:underline" href="/usr/article/list?boardId=3">
-            <span>Q&A</span>
+            <span>QnA</span>
           </a>
         </li>
         <c:if test="${!rq.logined}">
