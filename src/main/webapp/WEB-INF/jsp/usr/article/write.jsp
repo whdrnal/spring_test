@@ -7,11 +7,13 @@
 <style>
 table {
 	width: 95rem;
-	height: 50rem;
+	height: 44rem;
 }
+
 
 table, th, td {
 	border: 2px solid #e2e8f0;
+    height: 4rem;
 }
 </style>
 </head>
